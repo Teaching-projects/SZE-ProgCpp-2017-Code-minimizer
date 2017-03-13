@@ -1,7 +1,7 @@
 #ifndef SOURCECODE_H
 #define SOURCECODE_H
 
-#include <qstringbuilder.h>
+#include <QString>
 
 class sourceCode
 {
@@ -11,7 +11,7 @@ public:
      * @overload
      */
     sourceCode();
-    sourceCode(QStringBuilder source);
+    sourceCode(QString);
 
     /*
      * The source code length
@@ -32,6 +32,12 @@ public:
     void jump(int i);
 
     /*
+     * @overload
+     */
+    void charAt();
+    void charAt(int i);
+
+    /*
      * Where is the index
      * @return int
      */
@@ -41,13 +47,13 @@ public:
      * Get source code
      * @return QStringBuilder
      */
-    QStringBuilder getSource();
+    QString getSource();
 
     /*
      * Set source code
      * @return QStringBuilder
      */
-    void setSource(QStringBuilder str);
+    void setSource(QString str);
 
     /*
      * Add a character with the source code
@@ -72,8 +78,10 @@ private:
      * @var source / Source code
      * @var i / Index attribute
      */
-    QStringBuilder source;
+    QString source;
     int i;
+
+    void initSourceCode();
 
 };
 
