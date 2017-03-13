@@ -2,6 +2,7 @@
 #define SOURCECODE_H
 
 #include <QString>
+#include <QChar>
 
 class sourceCode
 {
@@ -23,9 +24,10 @@ public:
      * The next character of the source code
      * @return char
      */
-    char getNextChar();
+    QChar getNextChar();
 
     /*
+     * Jump with index
      * @overload
      */
     void jump();
@@ -59,7 +61,7 @@ public:
      * Add a character with the source code
      * @param char c
      */
-    void appendChar(char c);
+    void appendChar(QChar c);
 
     /*
      * Remove a character of the source code
