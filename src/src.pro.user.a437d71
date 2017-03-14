@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 2.7.0, 2017-03-14T23:48:22. -->
+<!-- Written by QtCreator 2.7.0, 2017-03-14T22:25:58. -->
 <qtcreator>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
@@ -107,7 +107,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
     <value type="QByteArray" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4BuildConfiguration</value>
     <value type="int" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration">2</value>
-    <value type="QString" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildDirectory">D:/Egyetem/4. Félév/Programozás C++ban/Beadandó/SZE-ProgCpp-2017-Code-minimizer/build-src-Desktop_Qt_5_0_2_MinGW_32bit-Debug</value>
+    <value type="QString" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildDirectory">E:/Dropbox (Personal)/developments.cpp/developments/SZE-ProgCpp-2017-Code-minimizer/build-src-Desktop_Qt_5_0_2_MinGW_32bit-Debug</value>
     <value type="bool" key="Qt4ProjectManager.Qt4BuildConfiguration.UseShadowBuild">true</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.1">
@@ -160,7 +160,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
     <value type="QByteArray" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4BuildConfiguration</value>
     <value type="int" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration">0</value>
-    <value type="QString" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildDirectory">D:/Egyetem/4. Félév/Programozás C++ban/Beadandó/SZE-ProgCpp-2017-Code-minimizer/build-src-Desktop_Qt_5_0_2_MinGW_32bit-Release</value>
+    <value type="QString" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildDirectory">E:/Dropbox (Personal)/developments.cpp/developments/SZE-ProgCpp-2017-Code-minimizer/build-src-Desktop_Qt_5_0_2_MinGW_32bit-Release</value>
     <value type="bool" key="Qt4ProjectManager.Qt4BuildConfiguration.UseShadowBuild">true</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.BuildConfigurationCount">2</value>
@@ -211,7 +211,7 @@
     </valuelist>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">src</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
-    <value type="QByteArray" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:D:/Egyetem/4. Félév/Programozás C++ban/Beadandó/SZE-ProgCpp-2017-Code-minimizer/src/src.pro</value>
+    <value type="QByteArray" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:E:/Dropbox (Personal)/developments.cpp/developments/SZE-ProgCpp-2017-Code-minimizer/src/src.pro</value>
     <value type="int" key="Qt4ProjectManager.Qt4RunConfiguration.BaseEnvironmentBase">2</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments"></value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">src.pro</value>
@@ -234,7 +234,7 @@
  </data>
  <data>
   <variable>ProjectExplorer.Project.Updater.EnvironmentId</variable>
-  <value type="QString">{78a867b4-04fb-4658-acfb-9e52cbab6f6a}</value>
+  <value type="QString">{a437d719-fdc1-47ea-8636-766b97a0cb8f}</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.Updater.FileVersion</variable>
