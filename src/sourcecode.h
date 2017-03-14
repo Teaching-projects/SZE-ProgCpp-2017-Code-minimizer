@@ -36,8 +36,8 @@ public:
     /*
      * @overload
      */
-    void charAt();
-    void charAt(int i);
+    QChar charAt();
+    QChar charAt(int i);
 
     /*
      * Where is the index

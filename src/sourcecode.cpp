@@ -20,7 +20,7 @@ void sourceCode::setSource(QString str){
 QChar sourceCode::getNextChar(){
     i++;
     if(i < length()){
-        return source.at(i);
+        return charAt();
     }
     i--;
     return 0;
@@ -76,4 +76,12 @@ void sourceCode::removeChar(int i){
 void sourceCode::empty(){
     i=0;
     source.remove(i,length());
+}
+
+QChar sourceCode::charAt(){
+    return source.at(i);
+}
+
+QChar sourceCode::charAt(int i){
+    return source.at(i);
 }
