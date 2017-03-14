@@ -1,8 +1,13 @@
-#include <QCoreApplication>
+#include <iostream>
+#include "sourcecode.h"
 
-int main(int argc, char *argv[])
+using namespace std;
+
+int main()
 {
-    QCoreApplication a(argc, argv);
-    
-    return a.exec();
+    sourceCode testSource("vaolmai");
+
+    cout << testSource.length();
+
+    return 0;
 }

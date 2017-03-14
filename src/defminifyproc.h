@@ -30,8 +30,8 @@ protected:
      * @param int i / Which index
      * @return boolean
      */
-    boolean isNextChar();
-    boolean isNextChar(int i);
+    bool isNextChar();
+    bool isNextChar(int i);
 
     /*
      * Macskakörmök kiküszöbölése. Ezek között a karakterek között lévő
@@ -55,7 +55,7 @@ protected:
      * @param char c / Ellenőrizendő karakter.
      * @return
      */
-    boolean isWord(char c);
+    bool isWord(char c);
 };
 
 #endif // DEFMINIFYPROC_H

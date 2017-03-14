@@ -2,17 +2,11 @@
 
 sourceCode::sourceCode()
 {
-   initSourceCode();
 }
 
 sourceCode::sourceCode(QString str)
 {
-    initSourceCode();
     setSource(str);
-}
-
-void sourceCode::initSourceCode(){
-    source=new QString();
 }
 
 int sourceCode::length(){
@@ -25,21 +19,23 @@ void sourceCode::setSource(QString str){
 
 QChar sourceCode::getNextChar(){
     i++;
-    if(i+1 < source.length()){
+    if(i < length()){
         return source.at(i);
     }
     i--;
     return 0;
 }
 
-/*
- * @overload
- */
-void sourceCode::jump(){
-
+void sourceCode::jumpToStart(){
+    i=0;
 }
+
+void sourceCode::jumpToEnd(){
+    i=length()-1;
+}
+
 void sourceCode::jump(int i){
-    if(i+1 < source.length())
+    if(i+1 < length())
     this->i=i;
 }
 
@@ -51,7 +47,7 @@ int sourceCode::getIndex(){
     return i;
 }
 
-int sourceCode::getSource(){
+QString sourceCode::getSource(){
     return source;
 }
 
@@ -69,6 +65,8 @@ void sourceCode::appendChar(QChar c){
  */
 void sourceCode::removeChar(int i){
     source.remove(i,1);
+    if(i < this->i)
+        i--;
 }
 
 /*
@@ -76,5 +74,6 @@ void sourceCode::removeChar(int i){
  * @param char c
  */
 void sourceCode::empty(){
-    source.remove(0,source.length());
+    i=0;
+    source.remove(i,length());
 }

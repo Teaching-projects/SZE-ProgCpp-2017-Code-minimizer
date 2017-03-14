@@ -12,7 +12,7 @@ public:
      * @overload
      */
     sourceCode();
-    sourceCode(QString);
+    sourceCode(QString str);
 
     /*
      * The source code length
@@ -28,9 +28,9 @@ public:
 
     /*
      * Jump with index
-     * @overload
      */
-    void jump();
+    void jumpToStart();
+    void jumpToEnd();
     void jump(int i);
 
     /*
@@ -82,8 +82,6 @@ private:
      */
     QString source;
     int i;
-
-    void initSourceCode();
 
 };
 

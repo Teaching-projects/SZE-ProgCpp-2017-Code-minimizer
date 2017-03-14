@@ -14,7 +14,6 @@ CONFIG   -= app_bundle
 
 TEMPLATE = app
 
-
 SOURCES += main.cpp \
     commentremove.cpp \
     cssminifyproc.cpp \
@@ -28,3 +27,4 @@ HEADERS += \
     jsminifyproc.h \
     defminifyproc.h \
     sourcecode.h
+
