@@ -17,7 +17,7 @@ void sourceCode::setSource(QString str){
     source.append(str);
 }
 
-QChar sourceCode::getNextChar(){
+char sourceCode::getNextChar(){
     i++;
     if(i < length()){
         return charAt();
@@ -54,7 +54,7 @@ QString sourceCode::getSource(){
 /*
  * Add a character with the source code
  */
-void sourceCode::append(QChar c){
+void sourceCode::append(char c){
     source.append(c);
 }
 
@@ -81,10 +81,10 @@ void sourceCode::empty(){
     source.remove(i,length());
 }
 
-QChar sourceCode::charAt(){
-    return source.at(i);
+char sourceCode::charAt(){
+    return source.at(i).toLatin1();
 }
 
-QChar sourceCode::charAt(int i){
-    return source.at(i);
+char sourceCode::charAt(int i){
+    return source.at(i).toLatin1();
 }
