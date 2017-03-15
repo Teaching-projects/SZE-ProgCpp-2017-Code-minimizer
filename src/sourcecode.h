@@ -61,7 +61,8 @@ public:
      * Add a character with the source code
      * @param char c
      */
-    void appendChar(QChar c);
+    void append(QChar c);
+    void append(QString c);
 
     /*
      * Remove a character of the source code

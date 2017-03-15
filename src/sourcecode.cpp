@@ -53,10 +53,13 @@ QString sourceCode::getSource(){
 
 /*
  * Add a character with the source code
- * @param char c
  */
-void sourceCode::appendChar(QChar c){
+void sourceCode::append(QChar c){
     source.append(c);
+}
+
+void sourceCode::append(QString str){
+    source.append(str);
 }
 
 /*
