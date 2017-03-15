@@ -7,8 +7,13 @@
 class cssMinifyProc : public defMinifyProc
 {
 public:
-    cssMinifyProc();
     cssMinifyProc(sourceCode);
+    void minimize();
+
+private:
+    bool specSelectorStart(char c);
+    bool specSelectorEnd(char c);
+
 };
 
 #endif // CSSMINIFYPROC_H

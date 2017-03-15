@@ -1,5 +1,17 @@
 #include "cssminifyproc.h"
 
-cssMinifyProc::cssMinifyProc()
-{
+cssMinifyProc::cssMinifyProc(sourceCode src) {
+    setOldSource(src);
 }
+
+bool cssMinifyProc::specSelectorStart(char c) {
+    return c == '.' || c == '#' || c == '*' || c == '[';
+}
+
+cssMinifyProc::specSelectorEnd(char c) {
+    return c == ')' || c == ']' || c == '*';
+}
+
+/*void cssMinifyProc::minimize() {
+
+}*/
