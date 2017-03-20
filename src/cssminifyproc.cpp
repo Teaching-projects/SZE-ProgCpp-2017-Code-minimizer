@@ -26,24 +26,24 @@ void cssMinifyProc::minimize() {
                 newSource.append(oldSource.charAt(i));
                 break;
             case '\'':
-                defMinifyProc::quotationMarks('\'');
+                quotationMarks('\'');
                 break;
             case '"':
-                defMinifyProc::quotationMarks('"');
+                quotationMarks('"');
                 break;
             default:
-                if (defMinifyProc::isWhiteSpace(oldSource.charAt(i)) != -1) {
+                if (isWhiteSpace(oldSource.charAt(i)) != -1) {
                     int j = i - 1;
-                    while (defMinifyProc::isWhiteSpace(oldSource.length() ? oldSource.charAt(i + 1) : 'a') != -1) {
+                    while (isWhiteSpace(oldSource.length() ? oldSource.charAt(i + 1) : 'a') != -1) {
                         i++;
                     }
                     if(j > -1 && oldSource.length()) {
                         if(stat) {
-                            if(defMinifyProc::isWord(oldSource.charAt(j)) && defMinifyProc::isWord(oldSource.charAt(i + 1))) {
+                            if(isWord(oldSource.charAt(j)) && isWord(oldSource.charAt(i + 1))) {
                                 newSource.append(' ');
                             }
-                        } else if ((defMinifyProc::isWord(oldSource.charAt(j)) || cssMinifyProc::specSelectorEnd(oldSource.charAt(j)))
-                                    && (defMinifyProc::isWord(oldSource.charAt(i + 1)) || cssMinifyProc::specSelectorStart(oldSource.charAt(i + 1)))) {
+                        } else if ((isWord(oldSource.charAt(j)) || specSelectorEnd(oldSource.charAt(j)))
+                                    && (isWord(oldSource.charAt(i + 1)) || specSelectorStart(oldSource.charAt(i + 1)))) {
                             newSource.append(' ');
                         }
                     }
