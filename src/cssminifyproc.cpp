@@ -24,14 +24,12 @@ void cssMinifyProc::minimize() {
             case '}':
                 stat = false;
                 newSource.append(oldSource.charAt(i));
+                break;
             case '\'':
                 defMinifyProc::quotationMarks('\'');
                 break;
             case '"':
                 defMinifyProc::quotationMarks('"');
-                break;
-            case '/':
-                /*Ide majd a commentremove osztályból kelleni fog egy metódus! Annak a felhasználásával lesz megoldva*/
                 break;
             default:
                 if (defMinifyProc::isWhiteSpace(oldSource.charAt(i)) != -1) {
