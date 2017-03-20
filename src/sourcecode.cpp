@@ -22,7 +22,6 @@ char sourceCode::getNextChar(){
     if(i < length()){
         return charAt();
     }
-    i--;
     return 0;
 }
 
@@ -39,9 +38,7 @@ void sourceCode::jumpNext(){
 }
 
 void sourceCode::jump(int i){
-    if(i+1 < length()){
         this->i=i;
-    }
 }
 
 /*
@@ -82,8 +79,9 @@ void sourceCode::removeChar(int i){
  * @param char c
  */
 void sourceCode::empty(){
-    i=0;
-    source.remove(i,length());
+    jumpToStart();
+    //source.remove(i,length());
+    source.clear();
 }
 
 char sourceCode::charAt() const{
