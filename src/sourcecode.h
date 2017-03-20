@@ -17,7 +17,7 @@ public:
      * The source code length
      * @return int
      */
-    int length();
+    int length()const;
 
     /*
      * The next character of the source code
@@ -35,20 +35,20 @@ public:
     /*
      * @overload
      */
-    char charAt();
-    char charAt(int i);
+    char charAt() const;
+    char charAt(int i) const;
 
     /*
      * Where is the index
      * @return int
      */
-    int getIndex();
+    int getIndex() const;
 
     /*
      * Get source code
      * @return QStringBuilder
      */
-    QString getSource();
+    QString getSource() const;
 
     /*
      * Set source code

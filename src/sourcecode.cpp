@@ -9,7 +9,7 @@ sourceCode::sourceCode(QString str)
     setSource(str);
 }
 
-int sourceCode::length(){
+int sourceCode::length() const{
     return source.length();
 }
 
@@ -35,19 +35,20 @@ void sourceCode::jumpToEnd(){
 }
 
 void sourceCode::jump(int i){
-    if(i+1 < length())
-    this->i=i;
+    if(i+1 < length()){
+        this->i=i;
+    }
 }
 
 /*
  * Where is the index
  * @return int
  */
-int sourceCode::getIndex(){
+int sourceCode::getIndex() const{
     return i;
 }
 
-QString sourceCode::getSource(){
+QString sourceCode::getSource() const{
     return source;
 }
 
@@ -81,10 +82,10 @@ void sourceCode::empty(){
     source.remove(i,length());
 }
 
-char sourceCode::charAt(){
+char sourceCode::charAt() const{
     return source.at(i).toLatin1();
 }
 
-char sourceCode::charAt(int i){
+char sourceCode::charAt(int i) const{
     return source.at(i).toLatin1();
 }
