@@ -11,9 +11,9 @@ jsMinifyProc::jsMinifyProc(sourceCode source)
 void jsMinifyProc::minimize()
 {
     /* Járjuk be a forráskódot. */
-            for (int i = 0; i < oldSource.length(); i++) {
+    for (oldSource.jumpToStart(); isNextChar(); oldSource.jumpNext()) {
                 /* Vizsgáljuk az adott karaktert. */
-                switch (oldSource.charAt(i)) {
+                switch (oldSource.charAt()) {
                     case '\'': // Aposztrof
                         quotationMarks('\'');
                         break;
@@ -22,11 +22,9 @@ void jsMinifyProc::minimize()
                         break;
                     default:
                         /* Ha fehérkaraktert találunk. */
-                        if (isWhiteSpace(oldSource.charAt(i)) != -1) {
+                        if (isWhiteSpace(oldSource.charAt()) != -1) {
                             /* Futtassuk egészen addig a ciklusunkat, ameddig a kövektező karakter nem lesz fehér karakter. */
-                            while (isWhiteSpace(isNextChar() ? oldSource.charAt(i + 1) : 'a') != -1) {
-                                i++;
-                            }
+                            while (isWhiteSpace(isNextChar() ? oldSource.getNextChar() : 'a') != -1);
                             /* Mentsük az eddigi minimalizált forráskód hosszát. */
                             int newSourceLength = newSource.length();
 
@@ -37,13 +35,13 @@ void jsMinifyProc::minimize()
                                  * és hogy az eredeti forráskód következő karaktere betű-e.
                                  * Ha igen, adjunk hozzá a tömörített forráskódhoz egy space-t.
                                  */
-                                if (isWord(newSource.charAt(newSourceLength - 1)) && isWord(oldSource.charAt(i + 1))) {
+                                if (isWord(newSource.charAt(newSourceLength - 1)) && isWord(oldSource.charAt(oldSource.getIndex() + 1))) {
                                     newSource.append(' ');
                                 }
                             }
                         } else {
                             /* Más esetben adjuk hozzá a karaktert a tömörített forráskódhoz. */
-                            newSource.append(oldSource.charAt(i));
+                            newSource.append(oldSource.charAt());
                             isFunctionEnd();
                         }
                 };
