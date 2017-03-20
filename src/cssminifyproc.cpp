@@ -15,15 +15,15 @@ bool cssMinifyProc::specSelectorEnd(char c) {
 void cssMinifyProc::minimize() {
     bool stat = false;
 
-    for(int i = 0; i < oldSource.length(); i++) {
-        switch (oldSource.charAt(i)) {
+    for (oldSource.jumpToStart(); isNextChar(); oldSource.jumpNext()) {
+       switch (oldSource.charAt()) {
             case '{':
                 stat = true;
-                newSource.append(oldSource.charAt(i));
+                newSource.append(oldSource.charAt());
                 break;
             case '}':
                 stat = false;
-                newSource.append(oldSource.charAt(i));
+                newSource.append(oldSource.charAt());
                 break;
             case '\'':
                 quotationMarks('\'');
@@ -32,23 +32,21 @@ void cssMinifyProc::minimize() {
                 quotationMarks('"');
                 break;
             default:
-                if (isWhiteSpace(oldSource.charAt(i)) != -1) {
-                    int j = i - 1;
-                    while (isWhiteSpace(oldSource.length() ? oldSource.charAt(i + 1) : 'a') != -1) {
-                        i++;
-                    }
-                    if(j > -1 && oldSource.length()) {
+                if (isWhiteSpace(oldSource.charAt()) != -1) {
+                    int j = oldSource.getIndex() - 1;
+                    while (isWhiteSpace(isNextChar() ? oldSource.getNextChar() : 'a') != -1);
+                    if(j > -1 && isNextChar()) {
                         if(stat) {
-                            if(isWord(oldSource.charAt(j)) && isWord(oldSource.charAt(i + 1))) {
+                            if(isWord(oldSource.charAt(j)) && isWord(oldSource.charAt(oldSource.getIndex() + 1))) {
                                 newSource.append(' ');
                             }
                         } else if ((isWord(oldSource.charAt(j)) || specSelectorEnd(oldSource.charAt(j)))
-                                    && (isWord(oldSource.charAt(i + 1)) || specSelectorStart(oldSource.charAt(i + 1)))) {
+                                    && (isWord(oldSource.charAt(oldSource.getIndex() + 1)) || specSelectorStart(oldSource.charAt(oldSource.getIndex() + 1)))) {
                             newSource.append(' ');
                         }
                     }
                 } else {
-                    newSource.append(oldSource.charAt(i));
+                    newSource.append(oldSource.charAt(oldSource.getIndex()));
                 }
         }
     }
