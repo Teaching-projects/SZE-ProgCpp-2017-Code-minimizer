@@ -30,6 +30,7 @@ public:
      */
     void jumpToStart();
     void jumpToEnd();
+    void jumpNext();
     void jump(int i);
 
     /*

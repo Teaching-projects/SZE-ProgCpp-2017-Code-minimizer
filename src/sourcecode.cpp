@@ -34,6 +34,10 @@ void sourceCode::jumpToEnd(){
     i=length()-1;
 }
 
+void sourceCode::jumpNext(){
+    jump(i+1);
+}
+
 void sourceCode::jump(int i){
     if(i+1 < length()){
         this->i=i;
