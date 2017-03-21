@@ -7,9 +7,11 @@
 class commentRemove : public defMinifyProc
 {
 public:
-    commentRemove();
     commentRemove(sourceCode);
+    void minimize();
 
+protected:
+    int removeComment();
 };
 
 #endif // COMMENTREMOVE_H
