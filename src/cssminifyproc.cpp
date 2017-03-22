@@ -46,7 +46,7 @@ void cssMinifyProc::minimize() {
                         }
                     }
                 } else {
-                    newSource.append(oldSource.charAt(oldSource.getIndex()));
+                    newSource.append(oldSource.charAt());
                 }
         }
     }
