@@ -24,6 +24,16 @@ int commentRemove::removeComment() {
 
 
 void commentRemove::minimize(){
-
+    for(oldSource.jumpToStart(); isNextChar(); oldSource.jumpNext()){
+        if(oldSource.charAt() == '/'){
+            int tmp = removeComment();
+            if(tmp == oldSource.getIndex()){
+                newSource.append(oldSource.charAt());
+            }
+            oldSource.jump(tmp);
+        }else{
+            newSource.append(oldSource.charAt());
+        }
+    }
 }
 
