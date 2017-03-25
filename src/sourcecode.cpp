@@ -49,7 +49,7 @@ int sourceCode::getIndex() const{
     return i;
 }
 
-std::string sourceCode::getSource() const{
+std::string sourceCode::toString() const{
     return source;
 }
 

@@ -49,7 +49,7 @@ public:
      * Get source code
      * @return QStringBuilder
      */
-	std::string getSource() const;
+	std::string toString() const;
 
     /*
      * Set source code
