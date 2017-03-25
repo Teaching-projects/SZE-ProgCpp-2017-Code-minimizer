@@ -9,7 +9,7 @@ class jsMinifyTest
 {
 public:
 	void setSource(std::string str);
-	void test(void);
+	void startTest(void);
 	std::string getSource(void);
 
 private:
