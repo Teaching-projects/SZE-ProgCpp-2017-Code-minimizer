@@ -7,6 +7,7 @@
 class cssMinifyProc : public defMinifyProc
 {
 public:
+	cssMinifyProc();
     cssMinifyProc(sourceCode);
     void minimize();
 
