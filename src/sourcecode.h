@@ -1,7 +1,7 @@
 #ifndef SOURCECODE_H
 #define SOURCECODE_H
 
-#include <QString>
+#include <string>
 
 class sourceCode
 {
@@ -11,7 +11,7 @@ public:
      * @overload
      */
     sourceCode();
-    sourceCode(QString str);
+    sourceCode(std::string str);
 
     /*
      * The source code length
@@ -49,20 +49,20 @@ public:
      * Get source code
      * @return QStringBuilder
      */
-    QString getSource() const;
+	std::string getSource() const;
 
     /*
      * Set source code
      * @return QStringBuilder
      */
-    void setSource(QString str);
+    void setSource(std::string str);
 
     /*
      * Add a character with the source code
      * @param char c
      */
     void append(char c);
-    void append(QString c);
+    void append(std::string c);
 
     /*
      * Remove a character of the source code
@@ -81,7 +81,7 @@ private:
      * @var source / Source code
      * @var i / Index attribute
      */
-    QString source;
+	std::string source;
     int i;
 
 };

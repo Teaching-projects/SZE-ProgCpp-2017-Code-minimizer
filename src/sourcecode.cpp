@@ -4,7 +4,7 @@ sourceCode::sourceCode()
 {
 }
 
-sourceCode::sourceCode(QString str)
+sourceCode::sourceCode(std::string str)
 {
     setSource(str);
 }
@@ -13,7 +13,7 @@ int sourceCode::length() const{
     return source.length();
 }
 
-void sourceCode::setSource(QString str){
+void sourceCode::setSource(std::string str){
     source.append(str);
 }
 
@@ -49,7 +49,7 @@ int sourceCode::getIndex() const{
     return i;
 }
 
-QString sourceCode::getSource() const{
+std::string sourceCode::getSource() const{
     return source;
 }
 
@@ -57,10 +57,10 @@ QString sourceCode::getSource() const{
  * Add a character with the source code
  */
 void sourceCode::append(char c){
-    source.append(c);
+    source.push_back(c);
 }
 
-void sourceCode::append(QString str){
+void sourceCode::append(std::string str){
     source.append(str);
 }
 
@@ -69,7 +69,7 @@ void sourceCode::append(QString str){
  * @param char c
  */
 void sourceCode::removeChar(int i){
-    source.remove(i,1);
+    source.erase(i,1);
     if(i < this->i)
         i--;
 }
@@ -80,14 +80,13 @@ void sourceCode::removeChar(int i){
  */
 void sourceCode::empty(){
     jumpToStart();
-    //source.remove(i,length());
     source.clear();
 }
 
 char sourceCode::charAt() const{
-    return source.at(i).toLatin1();
+    return source[i];
 }
 
 char sourceCode::charAt(int i) const{
-    return source.at(i).toLatin1();
+    return source[i];
 }
