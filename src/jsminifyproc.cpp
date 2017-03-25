@@ -1,7 +1,6 @@
 #include "jsminifyproc.h"
-#include <QRegularExpression>
-#include <QRegularExpressionMatch>
-#include <QString>
+#include <regex>
+#include <string>
 
 jsMinifyProc::jsMinifyProc(sourceCode source)
 {
@@ -52,19 +51,18 @@ void jsMinifyProc::minimize()
 void jsMinifyProc::isFunctionEnd()
 {
     if(oldSource.charAt(oldSource.getIndex()) == '}'){
-        QString str="";
+        std::string str="";
         int k=1;
 
         for(int j=0; (k+oldSource.getIndex()) < oldSource.length()-1 && j < 9; k++){
             if(isWhiteSpace(oldSource.charAt(oldSource.getIndex()+k)) == -1 || j > 5){
-                str.append(oldSource.charAt(oldSource.getIndex() + k));
+                str.push_back(oldSource.charAt(oldSource.getIndex() + k));
                 j++;
             }
         }
         /*Regex*/
-        QRegularExpression re("^(function\\W)$|^(this\\W.*)$");
-        QRegularExpressionMatch match = re.match(str);
-        if (match.hasMatch()) {
+        std::regex re("^(function\\W)$|^(this\\W.*)$");
+        if (std::regex_match(str,re)) {
             newSource.append(';');
             newSource.append(str);
             oldSource.jump(oldSource.getIndex()+k);
