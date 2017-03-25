@@ -7,11 +7,12 @@
 class commentRemove : public defMinifyProc
 {
 public:
+	commentRemove(); //Teszt miatt
     commentRemove(sourceCode);
     void minimize();
 
 protected:
-    int removeComment();
+    void removeComment();
 };
 
 #endif // COMMENTREMOVE_H
