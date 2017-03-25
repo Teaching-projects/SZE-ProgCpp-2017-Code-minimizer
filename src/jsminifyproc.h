@@ -7,7 +7,7 @@
 class jsMinifyProc : public defMinifyProc
 {
 public:
-	jsMinifyProc();
+	jsMinifyProc(); //Test miatt
     jsMinifyProc(sourceCode source);
     void minimize();
 

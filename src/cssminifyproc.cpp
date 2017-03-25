@@ -1,7 +1,6 @@
 #include "cssminifyproc.h"
 
-cssMinifyProc::cssMinifyProc() {
-
+cssMinifyProc::cssMinifyProc() { //Test miatt
 }
 
 cssMinifyProc::cssMinifyProc(sourceCode src) {

@@ -2,7 +2,7 @@
 #include <regex>
 #include <string>
 
-jsMinifyProc::jsMinifyProc()
+jsMinifyProc::jsMinifyProc() //Test miatt
 {
 }
 

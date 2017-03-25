@@ -7,7 +7,7 @@
 class cssMinifyProc : public defMinifyProc
 {
 public:
-	cssMinifyProc();
+	cssMinifyProc(); //Test miatt
     cssMinifyProc(sourceCode);
     void minimize();
 
