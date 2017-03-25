@@ -2,6 +2,10 @@
 #include <regex>
 #include <string>
 
+jsMinifyProc::jsMinifyProc()
+{
+}
+
 jsMinifyProc::jsMinifyProc(sourceCode source)
 {
     setOldSource(source);
@@ -23,7 +27,9 @@ void jsMinifyProc::minimize()
                         /* Ha fehérkaraktert találunk. */
                         if (isWhiteSpace(oldSource.charAt()) != -1) {
                             /* Futtassuk egészen addig a ciklusunkat, ameddig a kövektező karakter nem lesz fehér karakter. */
-                            while (isWhiteSpace(isNextChar() ? oldSource.getNextChar() : 'a') != -1);
+							while (isWhiteSpace(isNextChar() ? oldSource.charAt(oldSource.getIndex() + 1) : 'a') != -1) {
+								oldSource.jumpNext();
+							}
                             /* Mentsük az eddigi minimalizált forráskód hosszát. */
                             int newSourceLength = newSource.length();
 
