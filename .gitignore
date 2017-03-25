@@ -67,5 +67,12 @@ ipch/
 
 #my_ignore
 *.user
+*.vcxproj
+*.filters
+*.sln
+*.db
 
 /build-src-Desktop_Qt_5_0_2_MinGW_32bit-Debug/
+src/src.sln
+*.vcxproj
+src/src.sln
