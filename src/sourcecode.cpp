@@ -57,7 +57,8 @@ std::string sourceCode::toString() const{
  * Add a character with the source code
  */
 void sourceCode::append(char c){
-    source.push_back(c);
+    //source.push_back(c);
+	source += c;
 }
 
 void sourceCode::append(std::string str){

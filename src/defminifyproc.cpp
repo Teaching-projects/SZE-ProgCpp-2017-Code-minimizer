@@ -17,11 +17,11 @@ bool defMinifyProc::isNextChar(int i) {
 }
 
 void defMinifyProc::quotationMarks(char c) {
-    newSource.append(oldSource.charAt(oldSource.getIndex()));
+    newSource.append(oldSource.charAt());
     if(isNextChar()) {
         do {
             newSource.append(oldSource.getNextChar());
-        } while (isNextChar() && oldSource.charAt(oldSource.getIndex()) != c);
+        } while (isNextChar() && oldSource.charAt() != c);
     }
 }
 
