@@ -1,13 +1,26 @@
 #include <iostream>
-#include "sourcecode.h"
 
-using namespace std;
+#include "jsMinifyTest.h"
+#include "ReadFile.h"
+#include "WriteFile.h"
 
 int main()
 {
-    sourceCode testSource("vaolmai");
+	jsMinifyTest test;
 
-    cout << testSource.length();
+	std::string src = ReadFile::readFile("D:/functions.js");
 
-    return 0;
+	std::cout << "Before length: " << src.length() << "\n";
+
+	test.setSource(src);
+	test.startTest();
+
+	std::string newStr = test.getSource();
+
+	std::cout << "After length: " << newStr.length() << "\n";
+	WriteFile::writeFile(newStr,"D:/new.js");
+
+	std::getchar();
+
+	return 0;
 }

@@ -114,6 +114,7 @@
     <ClCompile Include="cssminifyproc.cpp" />
     <ClCompile Include="defminifyproc.cpp" />
     <ClCompile Include="jsminifyproc.cpp" />
+    <ClCompile Include="jsMinifyTest.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ReadFile.cpp" />
     <ClCompile Include="sourcecode.cpp" />
@@ -124,6 +125,7 @@
     <ClInclude Include="cssminifyproc.h" />
     <ClInclude Include="defminifyproc.h" />
     <ClInclude Include="jsminifyproc.h" />
+    <ClInclude Include="jsMinifyTest.h" />
     <ClInclude Include="ReadFile.h" />
     <ClInclude Include="sourcecode.h" />
     <ClInclude Include="WriteFile.h" />
