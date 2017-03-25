@@ -9,7 +9,7 @@ sourceCode defMinifyProc::getSource() {
 }
 
 bool defMinifyProc::isNextChar() {
-    return oldSource.getIndex() + 1 < oldSource.length();
+    return oldSource.getIndex() < oldSource.length();
 }
 
 bool defMinifyProc::isNextChar(int i) {
