@@ -17,39 +17,39 @@ public:
      * The source code length
      * @return int
      */
-    int length()const;
+    int length(void)const;
 
     /*
      * The next character of the source code
      * @return char
      */
-    char getNextChar();
+    char getNextChar(void);
 
     /*
      * Jump with index
      */
-    void jumpToStart();
-    void jumpToEnd();
-    void jumpNext();
+    void jumpToStart(void);
+    void jumpToEnd(void);
+    void jumpNext(void);
     void jump(int i);
 
     /*
      * @overload
      */
-    char charAt() const;
+    char charAt(void) const;
     char charAt(int i) const;
 
     /*
      * Where is the index
      * @return int
      */
-    int getIndex() const;
+    int getIndex(void) const;
 
     /*
      * Get source code
      * @return QStringBuilder
      */
-	std::string toString() const;
+	std::string toString(void) const;
 
     /*
      * Set source code
@@ -74,7 +74,7 @@ public:
      * Empty source code
      * @param char c
      */
-    void empty();
+    void empty(void);
 
 private:
     /*

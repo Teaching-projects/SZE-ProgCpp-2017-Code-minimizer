@@ -9,7 +9,7 @@ sourceCode::sourceCode(std::string str)
     setSource(str);
 }
 
-int sourceCode::length() const{
+int sourceCode::length(void) const{
     return source.length();
 }
 
@@ -17,7 +17,7 @@ void sourceCode::setSource(std::string str){
     source.append(str);
 }
 
-char sourceCode::getNextChar(){
+char sourceCode::getNextChar(void){
     i++;
     if(i < length()){
         return charAt();
@@ -25,15 +25,15 @@ char sourceCode::getNextChar(){
     return 0;
 }
 
-void sourceCode::jumpToStart(){
+void sourceCode::jumpToStart(void){
     i=0;
 }
 
-void sourceCode::jumpToEnd(){
+void sourceCode::jumpToEnd(void){
     i=length()-1;
 }
 
-void sourceCode::jumpNext(){
+void sourceCode::jumpNext(void){
     jump(i+1);
 }
 
@@ -45,11 +45,11 @@ void sourceCode::jump(int i){
  * Where is the index
  * @return int
  */
-int sourceCode::getIndex() const{
+int sourceCode::getIndex(void) const{
     return i;
 }
 
-std::string sourceCode::toString() const{
+std::string sourceCode::toString(void) const{
     return source;
 }
 
@@ -79,12 +79,12 @@ void sourceCode::removeChar(int i){
  * Empty source code
  * @param char c
  */
-void sourceCode::empty(){
+void sourceCode::empty(void){
     jumpToStart();
     source.clear();
 }
 
-char sourceCode::charAt() const{
+char sourceCode::charAt(void) const{
     return source[i];
 }
 
