@@ -11,7 +11,7 @@ jsMinifyProc::jsMinifyProc(sourceCode source)
     setOldSource(source);
 }
 
-void jsMinifyProc::minimize()
+void jsMinifyProc::minimize(void)
 {
     /* Járjuk be a forráskódot. */
     for (oldSource.jumpToStart(); isNextChar(); oldSource.jumpNext()) {
@@ -54,15 +54,15 @@ void jsMinifyProc::minimize()
 
 }
 
-void jsMinifyProc::isFunctionEnd()
+void jsMinifyProc::isFunctionEnd(void)
 {
-    if(oldSource.charAt(oldSource.getIndex()) == '}'){
+    if(oldSource.charAt() == '}'){
         std::string str="";
         int k=1;
 
         for(int j=0; (k+oldSource.getIndex()) < oldSource.length()-1 && j < 9; k++){
             if(isWhiteSpace(oldSource.charAt(oldSource.getIndex()+k)) == -1 || j > 5){
-                str.push_back(oldSource.charAt(oldSource.getIndex() + k));
+                str+=oldSource.charAt(oldSource.getIndex() + k);
                 j++;
             }
         }
@@ -74,4 +74,32 @@ void jsMinifyProc::isFunctionEnd()
             oldSource.jump(oldSource.getIndex()+k);
         }
     }
+}
+
+std::string jsMinifyProc::getID()
+{
+	return std::string();
+}
+
+void jsMinifyProc::getVariableName()
+{
+	for (oldSource.jumpToStart(); isNextChar(); oldSource.jumpNext()) {
+		switch (oldSource.charAt()) {
+		case 'v':
+
+			break;
+		case 't':
+
+			break;
+		}
+	}
+}
+
+void jsMinifyProc::minimizeVariableName(void) {
+
+
+}
+
+void jsMinifyProc::minimizeFunctionName(void) {
+
 }

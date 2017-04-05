@@ -3,16 +3,22 @@
 
 #include "defminifyproc.h"
 #include "sourcecode.h"
+#include <iostream>
+#include <string>
 
 class jsMinifyProc : public defMinifyProc
 {
 public:
 	jsMinifyProc(); //Test miatt
     jsMinifyProc(sourceCode source);
-    void minimize();
+    void minimize(void);
+	void minimizeVariableName(void);
+	void minimizeFunctionName(void);
 
 private:
-    void isFunctionEnd();
+    void isFunctionEnd(void);
+	std::string getID();
+	void getVariableName();
 };
 
 #endif // JSMINIFYPROC_H
