@@ -19,6 +19,8 @@ private slots:
 
     void on_FunctionButton_toggled(bool checked);
 
+    void on_AllInOneButton_clicked();
+
 private:
     Ui::Minify *ui;
 };

@@ -7,12 +7,14 @@ Minify::Minify(QWidget *parent) :
 {
     ui->setupUi(this);
     //ui->minimalizedCodeTxtBox->setTextColor(QColor(255, 255, 205));
-    ui->FunctionButton->setCheckable(true);
-    ui->FunctionButton->setCheckable(true);
-    ui->FunctionButton->setCheckable(true);
+    ui->CommentButton->setCheckable(true);
+    ui->WhiteSpaceButton->setCheckable(true);
+    ui->VariableButton->setCheckable(true);
     ui->FunctionButton->setCheckable(true);
 
-    ui->minimalizedCodeTxtBox->setText("sadsadsadsd\nsadsadsad");
+    ui->MinimalizedCodeTxtBox->setText("sadsadsadsd\nsadsadsad");
+
+
 }
 
 Minify::~Minify()
@@ -25,8 +27,21 @@ Minify::~Minify()
 void Minify::on_FunctionButton_toggled(bool checked)
 {
     if(checked)
-        ui->minimalizedCodeTxtBox->setText("lenyomva");
+    {
+        ui->MinimalizedCodeTxtBox->setText("lenyomva");
+
+    }
     else
-        ui->minimalizedCodeTxtBox->setText("nem lenyomva");
+        ui->MinimalizedCodeTxtBox->setText("nem lenyomva");
 }
 
+
+void Minify::on_AllInOneButton_clicked()
+{
+    ui->CommentButton->setChecked(true);
+    ui->WhiteSpaceButton->setChecked(true);
+    ui->VariableButton->setChecked(true);
+    ui->FunctionButton->setChecked(true);
+
+
+}
