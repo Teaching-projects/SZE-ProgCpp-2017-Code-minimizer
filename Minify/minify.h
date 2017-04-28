@@ -21,6 +21,8 @@ private slots:
 
     void on_AllInOneButton_clicked();
 
+    void on_LoadButton_clicked();
+
 private:
     Ui::Minify *ui;
 };

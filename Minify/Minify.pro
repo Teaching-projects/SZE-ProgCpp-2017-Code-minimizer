@@ -24,8 +24,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        minify.cpp
+        minify.cpp \
+    ReadFile.cpp
 
-HEADERS  += minify.h
+HEADERS  += minify.h \
+    ReadFile.h
 
 FORMS    += minify.ui

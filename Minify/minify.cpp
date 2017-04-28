@@ -1,5 +1,11 @@
 #include "minify.h"
 #include "ui_minify.h"
+#include "clocale"
+
+#include "ReadFile.h"
+
+#include <QFileDialog>
+#include <QDir>
 
 Minify::Minify(QWidget *parent) :
     QMainWindow(parent),
@@ -23,7 +29,6 @@ Minify::~Minify()
 }
 
 
-
 void Minify::on_FunctionButton_toggled(bool checked)
 {
     if(checked)
@@ -42,6 +47,13 @@ void Minify::on_AllInOneButton_clicked()
     ui->WhiteSpaceButton->setChecked(true);
     ui->VariableButton->setChecked(true);
     ui->FunctionButton->setChecked(true);
+}
 
-
+void Minify::on_LoadButton_clicked()
+{
+    std::setlocale(LC_ALL, "");
+    QString fileName = QFileDialog::getOpenFileName(this, "Megnyitás", "D://");
+    /*std::string fileContent = ReadFile::readFile(fileName.toStdString());*/
+    QString fileContent = QString::fromStdString(ReadFile::readFile(fileName.toStdString()));
+    ui->OriginalCodeTxtBox->setText(fileContent);
 }
