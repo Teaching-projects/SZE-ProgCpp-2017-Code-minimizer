@@ -142,9 +142,7 @@ std::string jsMinifyProc::variableReplace(std::string str) {
 		
 		str = std::regex_replace(str, e, "$1"+ it->first +"$3"); //replace
 	}
-
-
-
+	return str;
 }
 
 void jsMinifyProc::minimizeVariableName(void) {
