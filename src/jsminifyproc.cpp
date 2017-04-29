@@ -1,14 +1,16 @@
 #include "jsminifyproc.h"
+#include "commentremove.h"
 #include <regex>
 #include <string>
 
-jsMinifyProc::jsMinifyProc() //Test miatt
-{
+jsMinifyProc::jsMinifyProc() { //Test miatt 
+	variables = "`";
 }
 
-jsMinifyProc::jsMinifyProc(sourceCode source)
-{
-    setOldSource(source);
+jsMinifyProc::jsMinifyProc(sourceCode source) {
+	variables = "`";
+	setOldSource(source);
+	commentRemove isComment;
 }
 
 void jsMinifyProc::minimize(void)
@@ -81,23 +83,102 @@ std::string jsMinifyProc::getID()
 	return std::string();
 }
 
-void jsMinifyProc::getVariableName()
-{
-	for (oldSource.jumpToStart(); isNextChar(); oldSource.jumpNext()) {
-		switch (oldSource.charAt()) {
-		case 'v':
-
-			break;
-		case 't':
-
-			break;
-		}
+void jsMinifyProc::nameGenerator (int i){
+	if (variables[i] == '\0') {
+		variables += 'a';
+		return;
 	}
+
+	if (variables[i] == 'z') {
+		variables[i] = 'a';
+		nameGenerator(i + 1);
+	}
+
+	if (variables[i] == 'z') {
+		variables[i] = 'A';
+		return;
+	}
+
+	variables[i]++;
+}
+
+
+
+void jsMinifyProc::getVariableName(const std::string partString) //kigyűjti a neveket, map kell
+{
+		/*TO DO
+		Mi van akkor, ha stringben talál ilyet, vagy kommentben, azt nem kéne átírni. (Forráskód bejárása, komment/ string előtti rész ellenőrzése mindig?)
+		//[(}) ;\\t\\n]?($1)\\W+ <- ez a RegEx majd jó lehet a cserére
+		*/
+	std::string s = partString;
+	std::smatch m;
+	
+	std::regex e("[(}) ;\\t\\n]?var\\s+([A-Za-z]{1}[A-Za-z0-9]*)");
+
+	while (std::regex_search(s, m, e)) {
+		if (m.size() >= 2) {
+			nameGenerator(0);
+			container[variables] = m[1];
+		}
+		s = m.suffix().str();
+		
+	}
+	//map key-value cout
+	//std::vector<std::string> v; 
+	//for (std::map<std::string, std::string>::iterator it = container.begin(); it != container.end(); ++it) {
+	//	v.push_back(it->first);
+	//	std::cout << it->first << "-" << container[it->first] << "\n";
+	//}
+}
+
+std::string jsMinifyProc::variableReplace(std::string str) {
+	
+
+	std::vector<std::string> v;
+
+	for (std::map<std::string, std::string>::iterator it = container.begin(); it != container.end(); ++it) {
+		v.push_back(it->first);
+		std::regex e("([(}) ;\\t\\n]?)(" + container[it->first] + ")(\\W+)");
+		
+		str = std::regex_replace(str, e, "$1"+ it->first +"$3"); //replace
+	}
+
+
+
 }
 
 void jsMinifyProc::minimizeVariableName(void) {
+	int beforeC = 0;
+	
 
-
+	for (oldSource.jumpToStart(); isNextChar(); oldSource.jumpNext()) {
+		int tmp;
+		switch (oldSource.charAt()) {
+		case '\'':
+			quotationMarks('\'');
+			break;
+		case '"':
+			quotationMarks('"');
+			break;
+		case '/':
+			tmp = isComment.isComment(oldSource); //megnézi, hogy komment-e (vége index)
+			if (tmp != oldSource.getIndex()) {
+				/*
+				A komment előtti részből kicseréljük a változóneveket
+				komment részt hozzáadjuk az új forráshoz.
+				*/
+				std::string str = oldSource.partString(beforeC, oldSource.getIndex() - beforeC - 1);
+				getVariableName(str); //substring miatt
+				//replace
+				
+				newSource.append(variableReplace(str));
+				beforeC = tmp;
+			}
+			break;
+		default:
+			newSource.append(oldSource.charAt());
+		}
+	}
 }
 
 void jsMinifyProc::minimizeFunctionName(void) {

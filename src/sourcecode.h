@@ -76,6 +76,9 @@ public:
      */
     void empty(void);
 
+	std::string partString(int begin, int num);
+
+
 private:
     /*
      * @var source / Source code

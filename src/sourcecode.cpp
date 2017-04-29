@@ -84,6 +84,10 @@ void sourceCode::empty(void){
     source.clear();
 }
 
+ std::string sourceCode::partString(int begin, int num) {
+	 return source.substr(begin, num);
+ }
+
 char sourceCode::charAt(void) const{
     return source[i];
 }

@@ -2,25 +2,33 @@
 
 //#include "jsMinifyTest.h"
 //#include "cssMinifyTest.h"
+#include "jsMinifyProc.h"
 #include "commentTest.h"
 #include "ReadFile.h"
 #include "WriteFile.h"
 
-int main()
-{
-	/*jsMinifyTest test;
+int main() {
 
+
+	
 	std::string src = ReadFile::readFile("D:/functions.js");
+	std::cout << src << std::endl;
+	jsMinifyProc valami;	
+	valami.setOldSource(src);
+	valami.getVariableName(src);
+	valami.variableReplace(src);
+	WriteFile::writeFile(valami.getSource().toString(), "D:/new.js");
 
-	std::cout << "Before length: " << src.length() << "\n";
+	//std::cout << "Before length: " << src.length() << "\n";
 
-	test.setSource(src);
-	test.startTest();
+	//test.setSource(src);
+	//test.startTest();
 
-	std::string newStr = test.getSource();
+	//std::string newStr = test.getSource();
 
-	std::cout << "After length: " << newStr.length() << "\n";
-	WriteFile::writeFile(newStr,"D:/new.js");*/
+	//std::cout << "After length: " << newStr.length() << "\n";
+
+	/*WriteFile::writeFile(newStr,"D:/new.js");*/
 
 	/*WORKING!
 	cssMinifyTest test;
