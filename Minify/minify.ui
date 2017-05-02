@@ -79,7 +79,7 @@ font-family: magneto;</string>
 {
 background-color: rgb(255, 255, 255, 0);
 color: rgb(0, 0, 0);
-font-family: magneto;
+font-family: MS UI Gothic;
 }
 
 QRadioButton:hover
@@ -103,7 +103,7 @@ QRadioButton:hover
           <property name="styleSheet">
            <string notr="true">background-color: rgb(255, 255, 255, 0);
 color: rgb(0, 0, 0);
-font-family: magneto;</string>
+font-family: MS UI Gothic;</string>
           </property>
           <property name="text">
            <string>JavaSript</string>
@@ -125,7 +125,7 @@ font-family: magneto;</string>
          <widget class="QPushButton" name="LoadButton">
           <property name="font">
            <font>
-            <family>Magneto</family>
+            <family>MS UI Gothic</family>
             <pointsize>-1</pointsize>
             <weight>75</weight>
             <italic>false</italic>
@@ -144,7 +144,7 @@ border-color: black;
 font: bold 14px;
 min-width: 5em;
 padding: 1px;
-font-family: Magneto;
+font-family: MS UI Gothic;
 }
 
 QPushButton:hover
@@ -171,7 +171,7 @@ border-color: rgb(255, 255, 205);
          <widget class="QPushButton" name="AllInOneButton">
           <property name="font">
            <font>
-            <family>Magneto</family>
+            <family>MS UI Gothic</family>
             <pointsize>-1</pointsize>
             <weight>75</weight>
             <italic>false</italic>
@@ -190,7 +190,7 @@ border-color: black;
 font: bold 14px;
 min-width: 5em;
 padding: 1px;
-font-family: Magneto;
+font-family: MS UI Gothic;
 }
 
 QPushButton:hover
@@ -217,7 +217,7 @@ border-color: rgb(255, 255, 205);
          <widget class="QPushButton" name="SaveButton">
           <property name="font">
            <font>
-            <family>Magneto</family>
+            <family>MS UI Gothic</family>
             <pointsize>-1</pointsize>
             <weight>75</weight>
             <italic>false</italic>
@@ -236,7 +236,7 @@ border-color: black;
 font: bold 14px;
 min-width: 5em;
 padding: 1px;
-font-family: Magneto;
+font-family: MS UI Gothic;
 }
 
 QPushButton:hover
@@ -286,7 +286,7 @@ border-color: black;
 font: bold 14px;
 min-width: 5em;
 padding: 1px;
-font-family: Magneto;
+font-family: MS UI Gothic;
 }
 
 QPushButton:hover
@@ -323,7 +323,7 @@ border-color: black;
 font: bold 14px;
 min-width: 5em;
 padding: 1px;
-font-family: Magneto;
+font-family: MS UI Gothic;
 }
 
 QPushButton:hover
@@ -350,7 +350,7 @@ border-color: rgb(255, 255, 205);
          <widget class="QPushButton" name="VariableButton">
           <property name="font">
            <font>
-            <family>Magneto</family>
+            <family>MS UI Gothic</family>
             <pointsize>-1</pointsize>
             <weight>75</weight>
             <italic>false</italic>
@@ -369,7 +369,7 @@ border-color: black;
 font: bold 14px;
 min-width: 5em;
 padding: 1px;
-font-family: Magneto;
+font-family: MS UI Gothic;
 }
 
 QPushButton:hover
@@ -568,7 +568,7 @@ border-color: rgb(255, 255, 205);
           </property>
           <property name="font">
            <font>
-            <family>Magneto</family>
+            <family>MS UI Gothic</family>
             <pointsize>-1</pointsize>
             <weight>75</weight>
             <italic>false</italic>
@@ -587,7 +587,7 @@ border-color: black;
 font: bold 14px;
 min-width: 5em;
 padding: 1px;
-font-family: Magneto;
+font-family: MS UI Gothic;
 }
 
 QPushButton:hover
@@ -623,13 +623,13 @@ border-color: rgb(255, 255, 205);
            <widget class="QLabel" name="OriginalLable">
             <property name="font">
              <font>
-              <family>Magneto</family>
-              <pointsize>12</pointsize>
+              <family>MS UI Gothic</family>
              </font>
             </property>
             <property name="styleSheet">
              <string notr="true">background-color: rgb(0, 0, 0, 150);
 color: rgb(255, 255, 205);
+font-family: MS UI Gothic;
 </string>
             </property>
             <property name="text">
@@ -816,9 +816,7 @@ color: rgb(255, 255, 205);
             </property>
             <property name="font">
              <font>
-              <family>Cambria</family>
-              <pointsize>8</pointsize>
-              <italic>false</italic>
+              <family>MS UI Gothic</family>
              </font>
             </property>
             <property name="layoutDirection">
@@ -830,6 +828,7 @@ color: rgb(255, 255, 205);
             <property name="styleSheet">
              <string notr="true">background-color: rgb(0, 0, 0, 150);
 color: rgb(255, 255, 205);
+font-family: MS UI Gothic;
 </string>
             </property>
             <property name="text">
@@ -1093,14 +1092,13 @@ selection-color: rgb(0, 255, 0);</string>
            <widget class="QLabel" name="MinimalizedLable">
             <property name="font">
              <font>
-              <family>Magneto</family>
-              <pointsize>13</pointsize>
+              <family>MS UI Gothic</family>
              </font>
             </property>
             <property name="styleSheet">
              <string notr="true">background-color: rgb(0, 0, 0, 150);
 color: rgb(255, 255, 205);
-</string>
+font-family: MS UI Gothic;</string>
             </property>
             <property name="text">
              <string>Minimalizált</string>
@@ -1286,15 +1284,13 @@ color: rgb(255, 255, 205);
             </property>
             <property name="font">
              <font>
-              <family>Cambria</family>
-              <pointsize>8</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
+              <family>MS UI Gothic</family>
              </font>
             </property>
             <property name="styleSheet">
              <string notr="true">background-color: rgb(0, 0, 0, 150);
-color: rgb(255, 255, 205);</string>
+color: rgb(255, 255, 205);
+font-family: MS UI Gothic;</string>
             </property>
             <property name="text">
              <string>1234 kbyte</string>
@@ -1556,17 +1552,17 @@ selection-color: rgb(0, 255, 0);
        <widget class="QLabel" name="SavingsLabel">
         <property name="font">
          <font>
-          <family>Cambria</family>
+          <family>MS UI Gothic</family>
          </font>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgb(255, 255, 255, 0);
 color: rgb(255, 255, 205);
-font-family: Cambria;
+font-family: MS UI Gothic;
 </string>
         </property>
         <property name="text">
-         <string>567 kbyet 100|% megtakarítás</string>
+         <string>567 kbyet 100% megtakarítás</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>

@@ -1,6 +1,9 @@
 #ifndef MINIFY_H
 #define MINIFY_H
 
+#include "cssminifyproc.h"
+#include "commentremove.h"
+
 #include <QMainWindow>
 
 namespace Ui {
@@ -23,8 +26,13 @@ private slots:
 
     void on_LoadButton_clicked();
 
+    void on_CommentButton_toggled(bool checked);
+
 private:
     Ui::Minify *ui;
+    bool type;
+    commentRemove * cssCommentRemove;
+
 };
 
 #endif // MINIFY_H
