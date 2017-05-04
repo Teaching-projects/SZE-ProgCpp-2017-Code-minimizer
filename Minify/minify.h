@@ -32,10 +32,17 @@ private slots:
 
     void on_VariableButton_toggled(bool checked);
 
+    void readSource();
+
+    void on_JavaSriptRadioButton_clicked();
+
+    void on_CSSRadioButton_clicked();
+
 private:
     Ui::Minify *ui;
-    bool type;
-    commentRemove * cssCommentRemove;
+    bool isJsType;
+    commentRemove * commentRemover;
+
     bool isSourceRead;
     sourceCode* source;
 };

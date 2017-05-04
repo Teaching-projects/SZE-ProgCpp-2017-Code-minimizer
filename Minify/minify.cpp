@@ -19,15 +19,11 @@ Minify::Minify(QWidget *parent) : QMainWindow(parent), ui(new Ui::Minify)
     ui->VariableButton->setCheckable(true);
     ui->FunctionButton->setCheckable(true);
 
-    if (ui->CSSRadioButton->isChecked())
-        type = true;
-    else
-        type = false;
-
+    isJsType = true;
     source = new sourceCode();
     isSourceRead = false;
 
-    cssCommentRemove = new commentRemove();
+    commentRemover = new commentRemove();
     // as = new cssMinifyProc();
 }
 
@@ -47,29 +43,43 @@ void Minify::on_AllInOneButton_clicked()
 void Minify::on_LoadButton_clicked()
 {
     std::setlocale(LC_ALL, "");
-    QString filter = "All file (*.*) ;; CSS (*.css) ;; JavaSript (*.js)";
+    QString filter = "JavaSript (*.js) ;; CSS (*.css) ;; All file (*.*)";
     QString fileName = QFileDialog::getOpenFileName(this, "Megnyitás", "D://", filter);
     /*std::string fileContent = ReadFile::readFile(fileName.toStdString());*/
     QString fileContent = QString::fromStdString(ReadFile::readFile(fileName.toStdString()));
+
+
+
+    if(ReadFile::getFileExtension(fileName.toStdString()) == ".css")
+    {
+        ui->CSSRadioButton->setChecked(true);
+        Minify::on_CSSRadioButton_clicked();
+    }
+
     ui->OriginalCodeTxtBox->setText(fileContent);
 }
 
+//Komment eltávolítás
 void Minify::on_CommentButton_toggled(bool checked)
 {
+    //eredeti forráskód kiolvasása ha még nem volt
     if(!isSourceRead)
     {
-     isSourceRead = true;
+     /*isSourceRead = true;
      std::string content = (ui->OriginalCodeTxtBox->toPlainText()).toStdString();
      source->empty();
-     source->append(content);
+     source->append(content);*/
+     Minify::readSource();
+
     }
 
+    //komment kiszedése
     if(checked)
     {
         ui->CommentButton->setChecked(true);     
-        cssCommentRemove->setOldSource(*source);
-        cssCommentRemove->minimize();
-        ui->MinimalizedCodeTxtBox->setText(QString::fromStdString(cssCommentRemove->getSource().toString()));
+        commentRemover->setOldSource(*source);
+        commentRemover->minimize();
+        ui->MinimalizedCodeTxtBox->setText(QString::fromStdString(commentRemover->getSource().toString()));
 
         if(ui->WhiteSpaceButton->isChecked())
             on_WhiteSpaceButton_toggled(true);
@@ -77,14 +87,12 @@ void Minify::on_CommentButton_toggled(bool checked)
             on_VariableButton_toggled(true);
          if(ui->FunctionButton->isChecked())
              on_FunctionButton_toggled(true);
-
     }
+
     else
     {
         //visszatétel
         ui->CommentButton->setChecked(false);
-
-
 
         if(ui->WhiteSpaceButton->isChecked())
             on_WhiteSpaceButton_toggled(true);
@@ -101,14 +109,28 @@ void Minify::on_CommentButton_toggled(bool checked)
 
 void Minify::on_WhiteSpaceButton_toggled(bool checked)
 {
+    //eredeti forráskód kiolvasása ha még nem volt
     if(!isSourceRead)
     {
-     isSourceRead = true;
-     std::string content = (ui->OriginalCodeTxtBox->toPlainText()).toStdString();
-     source->empty();
-     source->append(content);
+     Minify::readSource();
     }
 
+    if(checked)
+    {
+        if(isJsType)
+        {
+
+        }
+        else
+        {
+
+        }
+    }
+
+    else
+    {
+
+    }
 
     isSourceRead = false;
 }
@@ -117,10 +139,7 @@ void Minify::on_VariableButton_toggled(bool checked)
 {
     if(!isSourceRead)
     {
-     isSourceRead = true;
-     std::string content = (ui->OriginalCodeTxtBox->toPlainText()).toStdString();
-     source->empty();
-     source->append(content);
+      Minify::readSource();
     }
 
 
@@ -131,10 +150,7 @@ void Minify::on_FunctionButton_toggled(bool checked)
 {
     if(!isSourceRead)
     {
-     isSourceRead = true;
-     std::string content = (ui->OriginalCodeTxtBox->toPlainText()).toStdString();
-     source->empty();
-     source->append(content);
+        Minify::readSource();
     }
 
     if(checked)
@@ -151,4 +167,24 @@ void Minify::on_FunctionButton_toggled(bool checked)
     isSourceRead = false;
 }
 
+void Minify::readSource()
+{
+    isSourceRead = true;
+    std::string content = (ui->OriginalCodeTxtBox->toPlainText()).toStdString();
+    source->empty();
+    source->append(content);
+}
 
+void Minify::on_JavaSriptRadioButton_clicked()
+{
+    isJsType = true;
+    ui->VariableButton->setEnabled(true);
+    ui->FunctionButton->setEnabled(true);
+}
+
+void Minify::on_CSSRadioButton_clicked()
+{
+    isJsType = false;
+    ui->VariableButton->setEnabled(false);
+    ui->FunctionButton->setEnabled(false);
+}

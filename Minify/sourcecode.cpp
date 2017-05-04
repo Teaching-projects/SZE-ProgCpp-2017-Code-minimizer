@@ -62,7 +62,7 @@ void sourceCode::append(char c){
 }
 
 void sourceCode::append(std::string str){
-    source.append(str);
+     source.append(str);
 }
 
 /*

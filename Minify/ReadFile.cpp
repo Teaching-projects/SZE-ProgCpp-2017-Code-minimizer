@@ -14,3 +14,9 @@ std::string ReadFile::readFile(std::string path)
         file.close();
         return fileContent;
 }
+
+std::string ReadFile::getFileExtension(std::string fileName)
+{
+    std::size_t lastDotPosition = fileName.find_last_of(".");
+    return fileName.substr(lastDotPosition);
+}

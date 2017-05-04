@@ -14,7 +14,7 @@
    <string>Minify</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background:qlineargradient(spread:reflect, x1:0.553, y1:0.317955, x2:0, y2:0.005, stop:0 rgba(232, 155, 0, 255), stop:1 rgba(0, 0, 0, 255));
+   <string notr="true">background-color: qlineargradient(spread:reflect, x1:0.428, y1:0.422, x2:1, y2:1, stop:0 rgba(232, 155, 0, 255), stop:1 rgba(0, 0, 0, 255));
 </string>
   </property>
   <widget class="QWidget" name="centralWidget">
@@ -70,6 +70,24 @@ font-family: magneto;</string>
       <item>
        <layout class="QVBoxLayout" name="TypeVerticalLayout">
         <item>
+         <widget class="QRadioButton" name="JavaSriptRadioButton">
+          <property name="layoutDirection">
+           <enum>Qt::RightToLeft</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255, 0);
+color: rgb(0, 0, 0);
+font-family: MS UI Gothic;</string>
+          </property>
+          <property name="text">
+           <string>JavaSript</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QRadioButton" name="CSSRadioButton">
           <property name="layoutDirection">
            <enum>Qt::RightToLeft</enum>
@@ -91,22 +109,7 @@ QRadioButton:hover
            <string>CSS</string>
           </property>
           <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="JavaSriptRadioButton">
-          <property name="layoutDirection">
-           <enum>Qt::RightToLeft</enum>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(255, 255, 255, 0);
-color: rgb(0, 0, 0);
-font-family: MS UI Gothic;</string>
-          </property>
-          <property name="text">
-           <string>JavaSript</string>
+           <bool>false</bool>
           </property>
          </widget>
         </item>
@@ -384,7 +387,14 @@ QPushButton:checked
 	color: rgb(255, 255, 205);
     background-color: rgb(0, 0, 0, 150);
     border-style: inset;
-border-color: rgb(255, 255, 205);
+	border-color: rgb(255, 255, 205);
+}
+
+QPushButton:disabled
+{
+	color: rgb(0, 0, 0, 0);
+    background-color: rgb(0, 0, 0, 0);
+	border-color: rgb(255, 255, 205, 0);
 }</string>
           </property>
           <property name="text">
@@ -511,7 +521,7 @@ border-color: rgb(255, 255, 205);
             <disabled>
              <colorrole role="WindowText">
               <brush brushstyle="SolidPattern">
-               <color alpha="255">
+               <color alpha="0">
                 <red>0</red>
                 <green>0</green>
                 <blue>0</blue>
@@ -521,15 +531,15 @@ border-color: rgb(255, 255, 205);
              <colorrole role="Button">
               <brush brushstyle="SolidPattern">
                <color alpha="0">
-                <red>255</red>
-                <green>255</green>
-                <blue>205</blue>
+                <red>0</red>
+                <green>0</green>
+                <blue>0</blue>
                </color>
               </brush>
              </colorrole>
              <colorrole role="Text">
               <brush brushstyle="SolidPattern">
-               <color alpha="255">
+               <color alpha="0">
                 <red>0</red>
                 <green>0</green>
                 <blue>0</blue>
@@ -538,7 +548,7 @@ border-color: rgb(255, 255, 205);
              </colorrole>
              <colorrole role="ButtonText">
               <brush brushstyle="SolidPattern">
-               <color alpha="255">
+               <color alpha="0">
                 <red>0</red>
                 <green>0</green>
                 <blue>0</blue>
@@ -548,18 +558,18 @@ border-color: rgb(255, 255, 205);
              <colorrole role="Base">
               <brush brushstyle="SolidPattern">
                <color alpha="0">
-                <red>255</red>
-                <green>255</green>
-                <blue>205</blue>
+                <red>0</red>
+                <green>0</green>
+                <blue>0</blue>
                </color>
               </brush>
              </colorrole>
              <colorrole role="Window">
               <brush brushstyle="SolidPattern">
                <color alpha="0">
-                <red>255</red>
-                <green>255</green>
-                <blue>205</blue>
+                <red>0</red>
+                <green>0</green>
+                <blue>0</blue>
                </color>
               </brush>
              </colorrole>
@@ -602,7 +612,14 @@ QPushButton:checked
 	color: rgb(255, 255, 205);
     background-color: rgb(0, 0, 0, 150);
     border-style: inset;
-border-color: rgb(255, 255, 205);
+	border-color: rgb(255, 255, 205);
+}
+
+QPushButton:disabled
+{
+	color: rgb(0, 0, 0, 0);
+    background-color: rgb(0, 0, 0, 0);
+	border-color: rgb(255, 255, 205, 0);
 }</string>
           </property>
           <property name="text">
