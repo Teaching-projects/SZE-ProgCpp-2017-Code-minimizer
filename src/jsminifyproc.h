@@ -17,18 +17,22 @@ public:
     void minimize(void);
 	void minimizeVariableName(void);
 	void minimizeFunctionName(void);
-	void getVariableName(const std::string);
-	std::string variableReplace(std::string str);
 
 private:
 	std::string variables;
 	std::map<std::string, std::string> container;
+
+	const std::string vregex = "[(}) ;\\t\\n]?var\\s+([A-Za-z]{1}[A-Za-z0-9]*)";
+	const std::string fregex = "[(}) ;\\t\\n]?function\\s+([A-Za-z]{1}[A-Za-z0-9]*)\\s*\\(";
+
+	void changeName(char, int *,std::string);
+
 	void nameGenerator(int i);
-	//std::string variableReplace(std::string str);
     void isFunctionEnd(void);
-	std::string getID();
-	commentRemove isComment;
-	//void getVariableName(const std::string);
+	void getName(const std::string, const std::string);
+	void jsMinifyProc::minimizeName(std::string);
+	std::string nameReplace(std::string str);
+	
 
 };
 

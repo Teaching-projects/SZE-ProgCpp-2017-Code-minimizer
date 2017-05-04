@@ -10,7 +10,6 @@ jsMinifyProc::jsMinifyProc() { //Test miatt
 jsMinifyProc::jsMinifyProc(sourceCode source) {
 	variables = "`";
 	setOldSource(source);
-	commentRemove isComment;
 }
 
 void jsMinifyProc::minimize(void)
@@ -78,11 +77,6 @@ void jsMinifyProc::isFunctionEnd(void)
     }
 }
 
-std::string jsMinifyProc::getID()
-{
-	return std::string();
-}
-
 void jsMinifyProc::nameGenerator (int i){
 	if (variables[i] == '\0') {
 		variables += 'a';
@@ -102,9 +96,7 @@ void jsMinifyProc::nameGenerator (int i){
 	variables[i]++;
 }
 
-
-
-void jsMinifyProc::getVariableName(const std::string partString) //kigyűjti a neveket, map kell
+void jsMinifyProc::getName(const std::string partString,const std::string regex) //kigyűjti a neveket, map kell
 {
 		/*TO DO
 		Mi van akkor, ha stringben talál ilyet, vagy kommentben, azt nem kéne átírni. (Forráskód bejárása, komment/ string előtti rész ellenőrzése mindig?)
@@ -113,7 +105,7 @@ void jsMinifyProc::getVariableName(const std::string partString) //kigyűjti a n
 	std::string s = partString;
 	std::smatch m;
 	
-	std::regex e("[(}) ;\\t\\n]?var\\s+([A-Za-z]{1}[A-Za-z0-9]*)");
+	std::regex e(regex);
 
 	while (std::regex_search(s, m, e)) {
 		if (m.size() >= 2) {
@@ -131,8 +123,7 @@ void jsMinifyProc::getVariableName(const std::string partString) //kigyűjti a n
 	//}
 }
 
-std::string jsMinifyProc::variableReplace(std::string str) {
-	
+std::string jsMinifyProc::nameReplace(std::string str) {	
 
 	std::vector<std::string> v;
 
@@ -145,40 +136,47 @@ std::string jsMinifyProc::variableReplace(std::string str) {
 	return str;
 }
 
-void jsMinifyProc::minimizeVariableName(void) {
+void jsMinifyProc::minimizeName(std::string regex) {
 	int beforeC = 0;
-	
 
 	for (oldSource.jumpToStart(); isNextChar(); oldSource.jumpNext()) {
 		int tmp;
+		std::string str;
 		switch (oldSource.charAt()) {
 		case '\'':
-			quotationMarks('\'');
+			changeName('\'', &beforeC, regex);
 			break;
 		case '"':
-			quotationMarks('"');
+			changeName('"', &beforeC, regex);
 			break;
-		case '/':
-			tmp = isComment.isComment(oldSource); //megnézi, hogy komment-e (vége index)
-			if (tmp != oldSource.getIndex()) {
-				/*
-				A komment előtti részből kicseréljük a változóneveket
-				komment részt hozzáadjuk az új forráshoz.
-				*/
-				std::string str = oldSource.partString(beforeC, oldSource.getIndex() - beforeC - 1);
-				getVariableName(str); //substring miatt
-				//replace
-				
-				newSource.append(variableReplace(str));
-				beforeC = tmp;
-			}
-			break;
-		default:
-			newSource.append(oldSource.charAt());
 		}
+	}
+
+	if (oldSource.length() > beforeC) {
+		std::string str = oldSource.partString(beforeC, oldSource.getIndex() - beforeC);
+		getName(str, regex); //substring miatt
+
+		newSource.append(nameReplace(str));
 	}
 }
 
-void jsMinifyProc::minimizeFunctionName(void) {
+void jsMinifyProc::minimizeVariableName(void) {
+	container.empty();
+	minimizeName(vregex);
 
+}
+
+void jsMinifyProc::changeName(char c, int *beforeC,std::string regex) {
+	std::string str = oldSource.partString(*beforeC, oldSource.getIndex() - *beforeC);
+	getName(str, regex); //substring miatt
+						
+	newSource.append(nameReplace(str));
+	quotationMarks(c);
+
+	*beforeC = oldSource.getIndex() + 1;
+}
+
+void jsMinifyProc::minimizeFunctionName(void) {
+	container.empty();
+	minimizeName(fregex);
 }
