@@ -24,6 +24,9 @@ Minify::Minify(QWidget *parent) : QMainWindow(parent), ui(new Ui::Minify)
     else
         type = false;
 
+    source = new sourceCode();
+    isSourceRead = false;
+
     cssCommentRemove = new commentRemove();
     // as = new cssMinifyProc();
 }
@@ -32,22 +35,6 @@ Minify::~Minify()
 {
     delete ui;
 }
-
-
-void Minify::on_FunctionButton_toggled(bool checked)
-{
-    if(checked)
-    {
-        ui->MinimalizedCodeTxtBox->setText("lenyomva");
-        ui->FunctionButton->setChecked(true);
-    }
-    else
-{
-        ui->MinimalizedCodeTxtBox->setText("nem lenyomva");
-        ui->FunctionButton->setChecked(false);
-    }
-}
-
 
 void Minify::on_AllInOneButton_clicked()
 {
@@ -69,18 +56,99 @@ void Minify::on_LoadButton_clicked()
 
 void Minify::on_CommentButton_toggled(bool checked)
 {
+    if(!isSourceRead)
+    {
+     isSourceRead = true;
+     std::string content = (ui->OriginalCodeTxtBox->toPlainText()).toStdString();
+     source->empty();
+     source->append(content);
+    }
+
     if(checked)
     {
-        ui->CommentButton->setChecked(true);
-        QString content = ui->OriginalCodeTxtBox->toPlainText();
-        std::string content2 = content.toStdString();
-        sourceCode* hjk = new sourceCode(content2);
-        cssCommentRemove->setOldSource(*hjk);
+        ui->CommentButton->setChecked(true);     
+        cssCommentRemove->setOldSource(*source);
         cssCommentRemove->minimize();
         ui->MinimalizedCodeTxtBox->setText(QString::fromStdString(cssCommentRemove->getSource().toString()));
+
+        if(ui->WhiteSpaceButton->isChecked())
+            on_WhiteSpaceButton_toggled(true);
+        if(ui->VariableButton->isChecked())
+            on_VariableButton_toggled(true);
+         if(ui->FunctionButton->isChecked())
+             on_FunctionButton_toggled(true);
+
     }
     else
     {
+        //visszatétel
         ui->CommentButton->setChecked(false);
+
+
+
+        if(ui->WhiteSpaceButton->isChecked())
+            on_WhiteSpaceButton_toggled(true);
+        if(ui->VariableButton->isChecked())
+            on_VariableButton_toggled(true);
+         if(ui->FunctionButton->isChecked())
+             on_FunctionButton_toggled(true);
+
+         ui->MinimalizedCodeTxtBox->setText(QString::fromStdString(source->toString()));
+
     }
+    isSourceRead = false;
 }
+
+void Minify::on_WhiteSpaceButton_toggled(bool checked)
+{
+    if(!isSourceRead)
+    {
+     isSourceRead = true;
+     std::string content = (ui->OriginalCodeTxtBox->toPlainText()).toStdString();
+     source->empty();
+     source->append(content);
+    }
+
+
+    isSourceRead = false;
+}
+
+void Minify::on_VariableButton_toggled(bool checked)
+{
+    if(!isSourceRead)
+    {
+     isSourceRead = true;
+     std::string content = (ui->OriginalCodeTxtBox->toPlainText()).toStdString();
+     source->empty();
+     source->append(content);
+    }
+
+
+    isSourceRead = false;
+}
+
+void Minify::on_FunctionButton_toggled(bool checked)
+{
+    if(!isSourceRead)
+    {
+     isSourceRead = true;
+     std::string content = (ui->OriginalCodeTxtBox->toPlainText()).toStdString();
+     source->empty();
+     source->append(content);
+    }
+
+    if(checked)
+    {
+        ui->MinimalizedCodeTxtBox->setText("lenoymva");
+        ui->FunctionButton->setChecked(true);
+    }
+    else
+    {
+        ui->MinimalizedCodeTxtBox->setText("nem lenyomva");
+        ui->FunctionButton->setChecked(false);
+    }
+
+    isSourceRead = false;
+}
+
+

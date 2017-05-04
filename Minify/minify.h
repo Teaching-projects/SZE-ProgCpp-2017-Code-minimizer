@@ -28,11 +28,16 @@ private slots:
 
     void on_CommentButton_toggled(bool checked);
 
+    void on_WhiteSpaceButton_toggled(bool checked);
+
+    void on_VariableButton_toggled(bool checked);
+
 private:
     Ui::Minify *ui;
     bool type;
     commentRemove * cssCommentRemove;
-
+    bool isSourceRead;
+    sourceCode* source;
 };
 
 #endif // MINIFY_H
