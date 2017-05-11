@@ -61,7 +61,7 @@ public:
     QLabel *MinimalizedLable;
     QLabel *MinimalizedSizeLabel;
     QTextBrowser *MinimalizedCodeTxtBox;
-    QLabel *SavingsLabel;
+    QLabel *DifferencesLable;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -638,16 +638,16 @@ public:
 
         verticalLayout->addLayout(SourcesHorizontalLayout);
 
-        SavingsLabel = new QLabel(centralWidget);
-        SavingsLabel->setObjectName(QStringLiteral("SavingsLabel"));
-        SavingsLabel->setFont(font2);
-        SavingsLabel->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255, 0);\n"
+        DifferencesLable = new QLabel(centralWidget);
+        DifferencesLable->setObjectName(QStringLiteral("DifferencesLable"));
+        DifferencesLable->setFont(font2);
+        DifferencesLable->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255, 0);\n"
 "color: rgb(255, 255, 205);\n"
 "font-family: MS UI Gothic;\n"
 ""));
-        SavingsLabel->setAlignment(Qt::AlignCenter);
+        DifferencesLable->setAlignment(Qt::AlignCenter);
 
-        verticalLayout->addWidget(SavingsLabel);
+        verticalLayout->addWidget(DifferencesLable);
 
 
         verticalLayout_2->addLayout(verticalLayout);
@@ -683,10 +683,10 @@ public:
         VariableButton->setText(QApplication::translate("Minify", "V\303\241ltoz\303\263k", Q_NULLPTR));
         FunctionButton->setText(QApplication::translate("Minify", "F\303\274ggv\303\251ny", Q_NULLPTR));
         OriginalLable->setText(QApplication::translate("Minify", "Eredeti", Q_NULLPTR));
-        OriginalSizeLabel->setText(QApplication::translate("Minify", "1234 kbyte", Q_NULLPTR));
+        OriginalSizeLabel->setText(QApplication::translate("Minify", "0 byte", Q_NULLPTR));
         MinimalizedLable->setText(QApplication::translate("Minify", "Minimaliz\303\241lt", Q_NULLPTR));
-        MinimalizedSizeLabel->setText(QApplication::translate("Minify", "1234 kbyte", Q_NULLPTR));
-        SavingsLabel->setText(QApplication::translate("Minify", "567 kbyet 100% megtakar\303\255t\303\241s", Q_NULLPTR));
+        MinimalizedSizeLabel->setText(QApplication::translate("Minify", "0 byte", Q_NULLPTR));
+        DifferencesLable->setText(QApplication::translate("Minify", "567 kbyet 100% megtakar\303\255t\303\241s", Q_NULLPTR));
     } // retranslateUi
 
 };

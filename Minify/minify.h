@@ -3,6 +3,7 @@
 
 #include "cssminifyproc.h"
 #include "commentremove.h"
+#include "jsminifyproc.h"
 
 #include <QMainWindow>
 
@@ -38,10 +39,16 @@ private slots:
 
     void on_CSSRadioButton_clicked();
 
+    void on_OriginalCodeTxtBox_textChanged();
+
+    void Minify::setMinimalizedSize();
+
 private:
     Ui::Minify *ui;
     bool isJsType;
+
     commentRemove * commentRemover;
+    jsMinifyProc * whitespaceRemover;
 
     bool isSourceRead;
     sourceCode* source;

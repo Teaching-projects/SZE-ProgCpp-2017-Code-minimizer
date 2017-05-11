@@ -29,13 +29,15 @@ SOURCES += main.cpp\
     commentremove.cpp \
     cssminifyproc.cpp \
     defminifyproc.cpp \
-    sourcecode.cpp
+    sourcecode.cpp \
+    jsminifyproc.cpp
 
 HEADERS  += minify.h \
     ReadFile.h \
     commentremove.h \
     cssminifyproc.h \
     defminifyproc.h \
-    sourcecode.h
+    sourcecode.h \
+    jsminifyproc.h
 
 FORMS    += minify.ui

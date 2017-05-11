@@ -849,7 +849,7 @@ font-family: MS UI Gothic;
 </string>
             </property>
             <property name="text">
-             <string>1234 kbyte</string>
+             <string>0 byte</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -1310,7 +1310,7 @@ color: rgb(255, 255, 205);
 font-family: MS UI Gothic;</string>
             </property>
             <property name="text">
-             <string>1234 kbyte</string>
+             <string>0 byte</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -1566,7 +1566,7 @@ selection-color: rgb(0, 255, 0);
        </layout>
       </item>
       <item>
-       <widget class="QLabel" name="SavingsLabel">
+       <widget class="QLabel" name="DifferencesLable">
         <property name="font">
          <font>
           <family>MS UI Gothic</family>

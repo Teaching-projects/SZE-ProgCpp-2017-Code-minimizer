@@ -24,6 +24,7 @@ Minify::Minify(QWidget *parent) : QMainWindow(parent), ui(new Ui::Minify)
     isSourceRead = false;
 
     commentRemover = new commentRemove();
+    whitespaceRemover = new jsMinifyProc();
     // as = new cssMinifyProc();
 }
 
@@ -48,12 +49,15 @@ void Minify::on_LoadButton_clicked()
     /*std::string fileContent = ReadFile::readFile(fileName.toStdString());*/
     QString fileContent = QString::fromStdString(ReadFile::readFile(fileName.toStdString()));
 
-
-
     if(ReadFile::getFileExtension(fileName.toStdString()) == ".css")
     {
         ui->CSSRadioButton->setChecked(true);
         Minify::on_CSSRadioButton_clicked();
+    }
+    else if(ReadFile::getFileExtension(fileName.toStdString()) == ".js")
+    {
+        ui->JavaSriptRadioButton->setChecked(true);
+        Minify::on_JavaSriptRadioButton_clicked();
     }
 
     ui->OriginalCodeTxtBox->setText(fileContent);
@@ -82,11 +86,11 @@ void Minify::on_CommentButton_toggled(bool checked)
         ui->MinimalizedCodeTxtBox->setText(QString::fromStdString(commentRemover->getSource().toString()));
 
         if(ui->WhiteSpaceButton->isChecked())
-            on_WhiteSpaceButton_toggled(true);
+            Minify::on_WhiteSpaceButton_toggled(true);
         if(ui->VariableButton->isChecked())
-            on_VariableButton_toggled(true);
+            Minify::on_VariableButton_toggled(true);
          if(ui->FunctionButton->isChecked())
-             on_FunctionButton_toggled(true);
+            Minify::on_FunctionButton_toggled(true);
     }
 
     else
@@ -95,44 +99,22 @@ void Minify::on_CommentButton_toggled(bool checked)
         ui->CommentButton->setChecked(false);
 
         if(ui->WhiteSpaceButton->isChecked())
-            on_WhiteSpaceButton_toggled(true);
+            Minify::on_WhiteSpaceButton_toggled(true);
         if(ui->VariableButton->isChecked())
-            on_VariableButton_toggled(true);
+            Minify::on_VariableButton_toggled(true);
          if(ui->FunctionButton->isChecked())
-             on_FunctionButton_toggled(true);
+             Minify::on_FunctionButton_toggled(true);
 
          ui->MinimalizedCodeTxtBox->setText(QString::fromStdString(source->toString()));
-
     }
+
+    Minify::setMinimalizedSize();
     isSourceRead = false;
 }
 
 void Minify::on_WhiteSpaceButton_toggled(bool checked)
 {
-    //eredeti forráskód kiolvasása ha még nem volt
-    if(!isSourceRead)
-    {
-     Minify::readSource();
-    }
 
-    if(checked)
-    {
-        if(isJsType)
-        {
-
-        }
-        else
-        {
-
-        }
-    }
-
-    else
-    {
-
-    }
-
-    isSourceRead = false;
 }
 
 void Minify::on_VariableButton_toggled(bool checked)
@@ -187,4 +169,27 @@ void Minify::on_CSSRadioButton_clicked()
     isJsType = false;
     ui->VariableButton->setEnabled(false);
     ui->FunctionButton->setEnabled(false);
+}
+
+void Minify::on_OriginalCodeTxtBox_textChanged()
+{
+    QString content = ui->OriginalCodeTxtBox->toPlainText();
+    ui->OriginalSizeLabel->setText(QString::fromStdString(std::to_string(content.size())) + " byte");
+}
+
+void Minify::setMinimalizedSize()
+{
+    int originalSize = ui->OriginalCodeTxtBox->toPlainText().size();
+    int minimalizedSize = ui->MinimalizedCodeTxtBox->toPlainText().size();
+
+    if(minimalizedSize <= originalSize)
+    {
+        int sizeDifference = originalSize - minimalizedSize;
+        double percentDiffernece = 100 - ((double)minimalizedSize / (double)originalSize * (double)100);
+
+        ui->MinimalizedSizeLabel->setText(QString::fromStdString(std::to_string(minimalizedSize)) + " byte");
+        ui->DifferencesLable->setText(QString::fromStdString(std::to_string(sizeDifference) + " byte (" +
+                                      std::to_string(percentDiffernece) + " %) a megtakarítás"));
+
+    }
 }
