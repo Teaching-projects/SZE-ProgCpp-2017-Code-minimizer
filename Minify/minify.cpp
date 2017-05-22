@@ -13,19 +13,12 @@
 Minify::Minify(QWidget *parent) : QMainWindow(parent), ui(new Ui::Minify)
 {
     ui->setupUi(this);
-    //ui->minimalizedCodeTxtBox->setTextColor(QColor(255, 255, 205));
     ui->CommentButton->setCheckable(true);
     ui->WhiteSpaceButton->setCheckable(true);
     ui->VariableButton->setCheckable(true);
     ui->FunctionButton->setCheckable(true);
 
     isJsType = true;
-    source = new sourceCode();
-    isSourceRead = false;
-
-    commentRemover = new commentRemove();
-    whitespaceRemover = new jsMinifyProc();
-    // as = new cssMinifyProc();
 }
 
 Minify::~Minify()
@@ -37,8 +30,12 @@ void Minify::on_AllInOneButton_clicked()
 {
     ui->CommentButton->setChecked(true);
     ui->WhiteSpaceButton->setChecked(true);
-    ui->VariableButton->setChecked(true);
-    Minify::on_FunctionButton_toggled(true);
+    if(isJsType)
+    {
+        ui->VariableButton->setChecked(true);
+        ui->FunctionButton->setChecked(true);
+    }
+   doMinimize();
 }
 
 void Minify::on_LoadButton_clicked()
@@ -46,7 +43,6 @@ void Minify::on_LoadButton_clicked()
     std::setlocale(LC_ALL, "");
     QString filter = "JavaSript (*.js) ;; CSS (*.css) ;; All file (*.*)";
     QString fileName = QFileDialog::getOpenFileName(this, "Megnyitás", "D://", filter);
-    /*std::string fileContent = ReadFile::readFile(fileName.toStdString());*/
     QString fileContent = QString::fromStdString(ReadFile::readFile(fileName.toStdString()));
 
     if(ReadFile::getFileExtension(fileName.toStdString()) == ".css")
@@ -67,94 +63,75 @@ void Minify::on_LoadButton_clicked()
 void Minify::on_CommentButton_toggled(bool checked)
 {
     //eredeti forráskód kiolvasása ha még nem volt
-    if(!isSourceRead)
-    {
-     /*isSourceRead = true;
-     std::string content = (ui->OriginalCodeTxtBox->toPlainText()).toStdString();
-     source->empty();
-     source->append(content);*/
-     Minify::readSource();
-
-    }
-
+    Minify::readSource();
     //komment kiszedése
     if(checked)
     {
-        ui->CommentButton->setChecked(true);     
-        commentRemover->setOldSource(*source);
-        commentRemover->minimize();
-        ui->MinimalizedCodeTxtBox->setText(QString::fromStdString(commentRemover->getSource().toString()));
-
-        if(ui->WhiteSpaceButton->isChecked())
-            Minify::on_WhiteSpaceButton_toggled(true);
-        if(ui->VariableButton->isChecked())
-            Minify::on_VariableButton_toggled(true);
-         if(ui->FunctionButton->isChecked())
-            Minify::on_FunctionButton_toggled(true);
+        ui->CommentButton->setChecked(true);
     }
 
     else
     {
         //visszatétel
         ui->CommentButton->setChecked(false);
+    }    
+       doMinimize();
 
-        if(ui->WhiteSpaceButton->isChecked())
-            Minify::on_WhiteSpaceButton_toggled(true);
-        if(ui->VariableButton->isChecked())
-            Minify::on_VariableButton_toggled(true);
-         if(ui->FunctionButton->isChecked())
-             Minify::on_FunctionButton_toggled(true);
 
-         ui->MinimalizedCodeTxtBox->setText(QString::fromStdString(source->toString()));
-    }
-
-    Minify::setMinimalizedSize();
-    isSourceRead = false;
 }
 
 void Minify::on_WhiteSpaceButton_toggled(bool checked)
 {
 
+        if(checked)
+        {
+            ui->WhiteSpaceButton->setChecked(true);
+        }
+
+        else
+        {
+            ui->WhiteSpaceButton->setChecked(false);
+        }
+
+        doMinimize();
+
 }
 
 void Minify::on_VariableButton_toggled(bool checked)
 {
-    if(!isSourceRead)
+    if(checked)
     {
-      Minify::readSource();
+        ui->VariableButton->setChecked(true);
     }
 
+    else
+    {
+        ui->VariableButton->setChecked(false);
+    }
 
-    isSourceRead = false;
+    doMinimize();
 }
 
 void Minify::on_FunctionButton_toggled(bool checked)
 {
-    if(!isSourceRead)
-    {
-        Minify::readSource();
-    }
-
     if(checked)
     {
-        ui->MinimalizedCodeTxtBox->setText("lenoymva");
         ui->FunctionButton->setChecked(true);
     }
+
     else
     {
-        ui->MinimalizedCodeTxtBox->setText("nem lenyomva");
         ui->FunctionButton->setChecked(false);
     }
 
-    isSourceRead = false;
+    doMinimize();
 }
 
 void Minify::readSource()
 {
-    isSourceRead = true;
     std::string content = (ui->OriginalCodeTxtBox->toPlainText()).toStdString();
-    source->empty();
-    source->append(content);
+    source.empty();
+    source.append(content);
 }
 
 void Minify::on_JavaSriptRadioButton_clicked()
@@ -169,6 +146,64 @@ void Minify::on_CSSRadioButton_clicked()
     isJsType = false;
     ui->VariableButton->setEnabled(false);
     ui->FunctionButton->setEnabled(false);
+}
+
+void Minify::doMinimize()
+{       
+        Minify::readSource();
+        if(isJsType)
+            jsMinify.resetName();
+
+        if (ui->CommentButton->isChecked())
+        {
+            commentRemover.setOldSource(source);
+            commentRemover.minimize();
+
+            source.empty();
+            source.append(commentRemover.getSource().toString());
+        }
+
+        if (ui->WhiteSpaceButton->isChecked())
+        {
+            if(isJsType)
+            {
+            jsMinify.setOldSource(source);
+            jsMinify.minimize();
+            }
+            else
+            {
+                cssMinify.setOldSource(source);
+                cssMinify.minimize();
+            }
+
+            source.empty();
+            source.append(isJsType?jsMinify.getSource().toString():cssMinify.getSource().toString());
+        }
+
+        if (ui->VariableButton->isChecked())
+        {
+
+            jsMinify.setOldSource(source);
+            jsMinify.minimizeVariableName();
+
+            source.empty();
+            source.append(jsMinify.getSource().toString());
+        }
+
+
+        if (ui->FunctionButton->isChecked())
+        {
+
+            jsMinify.setOldSource(source);
+            jsMinify.minimizeFunctionName();
+
+            source.empty();
+            source.append(jsMinify.getSource().toString());
+        }
+
+        ui->MinimalizedCodeTxtBox->setText(QString::fromStdString(source.toString()));
+        Minify::setMinimalizedSize();
+
 }
 
 void Minify::on_OriginalCodeTxtBox_textChanged()

@@ -14,6 +14,7 @@ int sourceCode::length(void) const{
 }
 
 void sourceCode::setSource(std::string str){
+	empty();
     source.append(str);
 }
 
@@ -62,7 +63,7 @@ void sourceCode::append(char c){
 }
 
 void sourceCode::append(std::string str){
-     source.append(str);
+    source.append(str);
 }
 
 /*

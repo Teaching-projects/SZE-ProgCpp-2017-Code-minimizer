@@ -2,6 +2,7 @@
 
 void defMinifyProc::setOldSource(sourceCode sc) {
     oldSource = sc;
+	newSource.empty();
 }
 
 sourceCode defMinifyProc::getSource() {

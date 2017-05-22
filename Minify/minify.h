@@ -33,25 +33,27 @@ private slots:
 
     void on_VariableButton_toggled(bool checked);
 
-    void readSource();
-
     void on_JavaSriptRadioButton_clicked();
 
     void on_CSSRadioButton_clicked();
 
     void on_OriginalCodeTxtBox_textChanged();
 
-    void Minify::setMinimalizedSize();
+    void setMinimalizedSize();
+
+    void readSource();
+
+  void Minify::doMinimize();
 
 private:
     Ui::Minify *ui;
     bool isJsType;
 
-    commentRemove * commentRemover;
-    jsMinifyProc * whitespaceRemover;
+    commentRemove  commentRemover;
+    jsMinifyProc  jsMinify;
+    cssMinifyProc cssMinify;
 
-    bool isSourceRead;
-    sourceCode* source;
+    sourceCode source;
 };
 
 #endif // MINIFY_H

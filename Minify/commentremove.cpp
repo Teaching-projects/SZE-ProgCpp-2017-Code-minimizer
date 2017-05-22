@@ -8,12 +8,6 @@ commentRemove::commentRemove(sourceCode src) {
     setOldSource(src);
 }
 
-int commentRemove::isComment(sourceCode src) {
-	setOldSource(src);
-	removeComment();
-	return oldSource.getIndex();
-}
-
 void commentRemove::removeComment() {
     if(isNextChar()){
         switch (oldSource.charAt(oldSource.getIndex() + 1)) {
