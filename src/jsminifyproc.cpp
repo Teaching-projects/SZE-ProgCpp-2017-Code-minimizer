@@ -98,10 +98,6 @@ void jsMinifyProc::nameGenerator (int i){
 
 void jsMinifyProc::getName(const std::string partString,const std::string regex) //kigyűjti a neveket, map kell
 {
-		/*TO DO
-		Mi van akkor, ha stringben talál ilyet, vagy kommentben, azt nem kéne átírni. (Forráskód bejárása, komment/ string előtti rész ellenőrzése mindig?)
-		//[(}) ;\\t\\n]?($1)\\W+ <- ez a RegEx majd jó lehet a cserére
-		*/
 	std::string s = partString;
 	std::smatch m;
 	
