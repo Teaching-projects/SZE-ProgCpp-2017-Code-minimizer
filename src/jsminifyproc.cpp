@@ -4,80 +4,85 @@
 #include <string>
 
 jsMinifyProc::jsMinifyProc() { //Test miatt 
-	variables = "`";
+	resetName();
 }
 
 jsMinifyProc::jsMinifyProc(sourceCode source) {
-	variables = "`";
+	resetName();
 	setOldSource(source);
+}
+
+void jsMinifyProc::resetName(void) {
+	variables = "'";
 }
 
 void jsMinifyProc::minimize(void)
 {
-    /* Járjuk be a forráskódot. */
-    for (oldSource.jumpToStart(); isNextChar(); oldSource.jumpNext()) {
-                /* Vizsgáljuk az adott karaktert. */
-                switch (oldSource.charAt()) {
-                    case '\'': // Aposztrof
-                        quotationMarks('\'');
-                        break;
-                    case '"':// Macskaköröm
-                        quotationMarks('"');
-                        break;
-                    default:
-                        /* Ha fehérkaraktert találunk. */
-                        if (isWhiteSpace(oldSource.charAt()) != -1) {
-                            /* Futtassuk egészen addig a ciklusunkat, ameddig a kövektező karakter nem lesz fehér karakter. */
-							while (isWhiteSpace(isNextChar() ? oldSource.charAt(oldSource.getIndex() + 1) : 'a') != -1) {
-								oldSource.jumpNext();
-							}
-                            /* Mentsük az eddigi minimalizált forráskód hosszát. */
-                            int newSourceLength = newSource.length();
+	/* Járjuk be a forráskódot. */
+	for (oldSource.jumpToStart(); isNextChar(); oldSource.jumpNext()) {
+		/* Vizsgáljuk az adott karaktert. */
+		switch (oldSource.charAt()) {
+		case '\'': // Aposztrof
+			quotationMarks('\'');
+			break;
+		case '"':// Macskaköröm
+			quotationMarks('"');
+			break;
+		default:
+			/* Ha fehérkaraktert találunk. */
+			if (isWhiteSpace(oldSource.charAt()) != -1) {
+				/* Futtassuk egészen addig a ciklusunkat, ameddig a kövektező karakter nem lesz fehér karakter. */
+				while (isWhiteSpace(isNextChar() ? oldSource.charAt(oldSource.getIndex() + 1) : 'a') != -1) {
+					oldSource.jumpNext();
+				}
+				/* Mentsük az eddigi minimalizált forráskód hosszát. */
+				int newSourceLength = newSource.length();
 
-                            /* Ha ez a hossz nem nulla, és az eredeti forráskódunknak sem értünk a végére. */
-                            if (newSourceLength != 0 && isNextChar()) {
-                                /*
-                                 * Nézzük meg, hogy az új forráskód utolsó eleme fehér karakter-e,
-                                 * és hogy az eredeti forráskód következő karaktere betű-e.
-                                 * Ha igen, adjunk hozzá a tömörített forráskódhoz egy space-t.
-                                 */
-                                if (isWord(newSource.charAt(newSourceLength - 1)) && isWord(oldSource.charAt(oldSource.getIndex() + 1))) {
-                                    newSource.append(' ');
-                                }
-                            }
-                        } else {
-                            /* Más esetben adjuk hozzá a karaktert a tömörített forráskódhoz. */
-                            newSource.append(oldSource.charAt());
-                            isFunctionEnd();
-                        }
-                };
-            }
+				/* Ha ez a hossz nem nulla, és az eredeti forráskódunknak sem értünk a végére. */
+				if (newSourceLength != 0 && isNextChar()) {
+					/*
+					* Nézzük meg, hogy az új forráskód utolsó eleme fehér karakter-e,
+					* és hogy az eredeti forráskód következő karaktere betű-e.
+					* Ha igen, adjunk hozzá a tömörített forráskódhoz egy space-t.
+					*/
+					if (isWord(newSource.charAt(newSourceLength - 1)) && isWord(oldSource.charAt(oldSource.getIndex() + 1))) {
+						newSource.append(' ');
+					}
+				}
+			}
+			else {
+				/* Más esetben adjuk hozzá a karaktert a tömörített forráskódhoz. */
+				newSource.append(oldSource.charAt());
+				isFunctionEnd();
+			}
+		};
+	}
 
 }
 
 void jsMinifyProc::isFunctionEnd(void)
 {
-    if(oldSource.charAt() == '}'){
-        std::string str="";
-        int k=1;
+	if (oldSource.charAt() == '}') {
+		std::string str = "";
+		int k = 1;
 
-        for(int j=0; (k+oldSource.getIndex()) < oldSource.length()-1 && j < 9; k++){
-            if(isWhiteSpace(oldSource.charAt(oldSource.getIndex()+k)) == -1 || j > 5){
-                str+=oldSource.charAt(oldSource.getIndex() + k);
-                j++;
-            }
-        }
-        /*Regex*/
-        std::regex re("^(function\\W)$|^(this\\W.*)$");
-        if (std::regex_match(str,re)) {
-            newSource.append(';');
-            newSource.append(str);
-            oldSource.jump(oldSource.getIndex()+k);
-        }
-    }
+		for (int j = 0; (k + oldSource.getIndex()) < oldSource.length() - 1 && j < 9; k++) {
+			if (isWhiteSpace(oldSource.charAt(oldSource.getIndex() + k)) == -1 || j > 5) {
+				str += oldSource.charAt(oldSource.getIndex() + k);
+				j++;
+			}
+		}
+		/*Regex*/
+		std::regex re("^(function\\W)$|^(this\\W.*)$");
+		if (std::regex_match(str, re)) {
+			newSource.append(';');
+			newSource.append(str);
+			oldSource.jump(oldSource.getIndex() + k);
+		}
+	}
 }
 
-void jsMinifyProc::nameGenerator (int i){
+void jsMinifyProc::nameGenerator(int i) {
 	if (variables[i] == '\0') {
 		variables += 'a';
 		return;
@@ -96,11 +101,11 @@ void jsMinifyProc::nameGenerator (int i){
 	variables[i]++;
 }
 
-void jsMinifyProc::getName(const std::string partString,const std::string regex) //kigyűjti a neveket, map kell
+void jsMinifyProc::getName(const std::string partString, const std::string regex) //kigyűjti a neveket, map kell
 {
 	std::string s = partString;
 	std::smatch m;
-	
+
 	std::regex e(regex);
 
 	while (std::regex_search(s, m, e)) {
@@ -109,7 +114,7 @@ void jsMinifyProc::getName(const std::string partString,const std::string regex)
 			container[variables] = m[1];
 		}
 		s = m.suffix().str();
-		
+
 	}
 	//map key-value cout
 	//std::vector<std::string> v; 
@@ -119,15 +124,15 @@ void jsMinifyProc::getName(const std::string partString,const std::string regex)
 	//}
 }
 
-std::string jsMinifyProc::nameReplace(std::string str) {	
+std::string jsMinifyProc::nameReplace(std::string str) {
 
 	std::vector<std::string> v;
 
 	for (std::map<std::string, std::string>::iterator it = container.begin(); it != container.end(); ++it) {
 		v.push_back(it->first);
 		std::regex e("([(}) ;\\t\\n]?)(" + container[it->first] + ")(\\W+)");
-		
-		str = std::regex_replace(str, e, "$1"+ it->first +"$3"); //replace
+
+		str = std::regex_replace(str, e, "$1" + it->first + "$3"); //replace
 	}
 	return str;
 }
@@ -157,15 +162,15 @@ void jsMinifyProc::minimizeName(std::string regex) {
 }
 
 void jsMinifyProc::minimizeVariableName(void) {
-	container.empty();
+	container.clear();
 	minimizeName(vregex);
 
 }
 
-void jsMinifyProc::changeName(char c, int *beforeC,std::string regex) {
+void jsMinifyProc::changeName(char c, int *beforeC, std::string regex) {
 	std::string str = oldSource.partString(*beforeC, oldSource.getIndex() - *beforeC);
 	getName(str, regex); //substring miatt
-						
+
 	newSource.append(nameReplace(str));
 	quotationMarks(c);
 
@@ -173,6 +178,6 @@ void jsMinifyProc::changeName(char c, int *beforeC,std::string regex) {
 }
 
 void jsMinifyProc::minimizeFunctionName(void) {
-	container.empty();
+	container.clear();
 	minimizeName(fregex);
 }

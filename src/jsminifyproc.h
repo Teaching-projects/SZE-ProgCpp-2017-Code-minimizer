@@ -26,6 +26,7 @@ private:
 	const std::string fregex = "[(}) ;\\t\\n]?function\\s+([A-Za-z]{1}[A-Za-z0-9]*)\\s*\\(";
 
 	void changeName(char, int *,std::string);
+	void resetName(void);
 
 	void nameGenerator(int i);
     void isFunctionEnd(void);
