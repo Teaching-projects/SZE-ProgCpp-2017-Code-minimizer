@@ -3,6 +3,7 @@
 #include "clocale"
 
 #include "ReadFile.h"
+#include "WriteFile.h"
 #include "cssminifyproc.h"
 
 #include <QFileDialog>
@@ -17,6 +18,8 @@ Minify::Minify(QWidget *parent) : QMainWindow(parent), ui(new Ui::Minify)
     ui->WhiteSpaceButton->setCheckable(true);
     ui->VariableButton->setCheckable(true);
     ui->FunctionButton->setCheckable(true);
+
+    std::setlocale(LC_ALL, "");
 
     isJsType = true;
 }
@@ -40,31 +43,37 @@ void Minify::on_AllInOneButton_clicked()
 
 void Minify::on_LoadButton_clicked()
 {
-    std::setlocale(LC_ALL, "");
     QString filter = "JavaSript (*.js) ;; CSS (*.css) ;; All file (*.*)";
     QString fileName = QFileDialog::getOpenFileName(this, "Megnyitás", "D://", filter);
-    QString fileContent = QString::fromStdString(ReadFile::readFile(fileName.toStdString()));
-
-    if(ReadFile::getFileExtension(fileName.toStdString()) == ".css")
+    if(!fileName.isEmpty()&& !fileName.isNull())
     {
-        ui->CSSRadioButton->setChecked(true);
-        Minify::on_CSSRadioButton_clicked();
-    }
-    else if(ReadFile::getFileExtension(fileName.toStdString()) == ".js")
-    {
-        ui->JavaSriptRadioButton->setChecked(true);
-        Minify::on_JavaSriptRadioButton_clicked();
-    }
+        QString fileContent = QString::fromStdString(ReadFile::readFile(fileName.toStdString()));
+        ui->OriginalCodeTxtBox->setText(fileContent);
+        if(ReadFile::getFileExtension(fileName.toStdString()) == ".css")
+        {
+            ui->CSSRadioButton->setChecked(true);
+            Minify::on_CSSRadioButton_clicked();
+        }
+        else if(ReadFile::getFileExtension(fileName.toStdString()) == ".js")
+        {
+            ui->JavaSriptRadioButton->setChecked(true);
+            Minify::on_JavaSriptRadioButton_clicked();
+        }
 
-    ui->OriginalCodeTxtBox->setText(fileContent);
+        ui->CommentButton->setChecked(false);
+        ui->WhiteSpaceButton->setChecked(false);
+        ui->VariableButton->setChecked(false);
+        ui->FunctionButton->setChecked(false);
+    }
+    else
+    {
+        ui->OriginalCodeTxtBox->setText("A fájlt nem lehet betölteni vagy üres");
+    }
 }
 
-//Komment eltávolítás
 void Minify::on_CommentButton_toggled(bool checked)
 {
-    //eredeti forráskód kiolvasása ha még nem volt
     Minify::readSource();
-    //komment kiszedése
     if(checked)
     {
         ui->CommentButton->setChecked(true);
@@ -72,7 +81,6 @@ void Minify::on_CommentButton_toggled(bool checked)
 
     else
     {
-        //visszatétel
         ui->CommentButton->setChecked(false);
     }    
        doMinimize();
@@ -227,4 +235,15 @@ void Minify::setMinimalizedSize()
                                       std::to_string(percentDiffernece) + " %) a megtakarítás"));
 
     }
+}
+
+void Minify::on_SaveButton_clicked()
+{
+    QString filter = "JavaSript (*.js) ;; CSS (*.css)";
+    QString saveFileName;
+    if(isJsType)
+        saveFileName = QFileDialog::getSaveFileName(this,"Mentés","./untitled.js",tr("JavaSript(*.js )"));
+    else
+        saveFileName = QFileDialog::getSaveFileName(this,"Mentés","./untitled.css",tr("CSS(*.css )"));
+    WriteFile::writeFile(ui->MinimalizedCodeTxtBox->toPlainText().toStdString(), saveFileName.toStdString());
 }
