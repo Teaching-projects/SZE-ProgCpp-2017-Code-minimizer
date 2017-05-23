@@ -45,6 +45,8 @@ private slots:
 
   void Minify::doMinimize();
 
+  void on_SaveButton_clicked();
+
 private:
     Ui::Minify *ui;
     bool isJsType;
