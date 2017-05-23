@@ -7,7 +7,7 @@
 #include "cssminifyproc.h"
 
 #include <QFileDialog>
-#include <QDir>
+//#include <QDir>
 
 
 
@@ -18,6 +18,18 @@ Minify::Minify(QWidget *parent) : QMainWindow(parent), ui(new Ui::Minify)
     ui->WhiteSpaceButton->setCheckable(true);
     ui->VariableButton->setCheckable(true);
     ui->FunctionButton->setCheckable(true);
+
+    QString iconPath = QDir::currentPath();
+    iconPath +="/icon.png";
+    //ui->MinimalizedCodeTxtBox->setText(iconPath);
+    if(QFile::exists(iconPath))
+        ui->infoButton->setIcon(QIcon(iconPath));
+    else
+    {
+        ui->infoButton->setText("info");
+    }
+
+
 
     std::setlocale(LC_ALL, "");
 
@@ -225,7 +237,7 @@ void Minify::setMinimalizedSize()
     int originalSize = ui->OriginalCodeTxtBox->toPlainText().size();
     int minimalizedSize = ui->MinimalizedCodeTxtBox->toPlainText().size();
 
-    if(minimalizedSize <= originalSize)
+    if(minimalizedSize < originalSize)
     {
         int sizeDifference = originalSize - minimalizedSize;
         double percentDiffernece = 100 - ((double)minimalizedSize / (double)originalSize * (double)100);
@@ -246,4 +258,9 @@ void Minify::on_SaveButton_clicked()
     else
         saveFileName = QFileDialog::getSaveFileName(this,"Mentés","./untitled.css",tr("CSS(*.css )"));
     WriteFile::writeFile(ui->MinimalizedCodeTxtBox->toPlainText().toStdString(), saveFileName.toStdString());
+}
+
+void Minify::on_infoButton_clicked()
+{
+    iw->show();
 }

@@ -31,7 +31,8 @@ SOURCES += main.cpp\
     defminifyproc.cpp \
     sourcecode.cpp \
     jsminifyproc.cpp \
-    WriteFile.cpp
+    WriteFile.cpp \
+    infowindow.cpp
 
 HEADERS  += minify.h \
     ReadFile.h \
@@ -40,6 +41,8 @@ HEADERS  += minify.h \
     defminifyproc.h \
     sourcecode.h \
     jsminifyproc.h \
-    WriteFile.h
+    WriteFile.h \
+    infowindow.h
 
-FORMS    += minify.ui
+FORMS    += minify.ui \
+    infowindow.ui

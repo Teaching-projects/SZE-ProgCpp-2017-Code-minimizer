@@ -5,6 +5,8 @@
 #include "commentremove.h"
 #include "jsminifyproc.h"
 
+#include "infowindow.h"
+
 #include <QMainWindow>
 
 namespace Ui {
@@ -47,6 +49,8 @@ private slots:
 
   void on_SaveButton_clicked();
 
+  void on_infoButton_clicked();
+
 private:
     Ui::Minify *ui;
     bool isJsType;
@@ -56,6 +60,8 @@ private:
     cssMinifyProc cssMinify;
 
     sourceCode source;
+
+    InfoWindow *iw = new InfoWindow();
 };
 
 #endif // MINIFY_H

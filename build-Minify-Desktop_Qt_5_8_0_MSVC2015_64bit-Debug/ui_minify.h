@@ -36,6 +36,7 @@ public:
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_2;
+    QPushButton *infoButton;
     QSpacerItem *horizontalSpacer_2;
     QLabel *TitleLabel;
     QSpacerItem *horizontalSpacer;
@@ -82,6 +83,32 @@ public:
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        infoButton = new QPushButton(centralWidget);
+        infoButton->setObjectName(QStringLiteral("infoButton"));
+        infoButton->setStyleSheet(QLatin1String("QPushButton\n"
+"{\n"
+"color: rgb(0, 0, 0);\n"
+"background-color: rgb(255, 255, 205,0);\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover\n"
+"{\n"
+"    background-color:  rgb(255,255,255, 0);\n"
+"   color: rgb(0,0,0);\n"
+"    border-style: inset;\n"
+"}\n"
+"\n"
+"QPushButton:checked\n"
+"{\n"
+"	color: rgb(255, 255, 205, 255);\n"
+"    background-color: rgb(0, 0, 0, 255);\n"
+"    border-style: inset;\n"
+"border-color: rgb(255, 255, 205, 255);\n"
+"}"));
+
+        horizontalLayout_2->addWidget(infoButton);
+
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_2->addItem(horizontalSpacer_2);
@@ -660,6 +687,7 @@ public:
         mainToolBar = new QToolBar(Minify);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
         Minify->addToolBar(Qt::TopToolBarArea, mainToolBar);
+        Minify->insertToolBarBreak(mainToolBar);
         statusBar = new QStatusBar(Minify);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         Minify->setStatusBar(statusBar);
@@ -672,11 +700,12 @@ public:
     void retranslateUi(QMainWindow *Minify)
     {
         Minify->setWindowTitle(QApplication::translate("Minify", "Minify", Q_NULLPTR));
+        infoButton->setText(QString());
         TitleLabel->setText(QApplication::translate("Minify", "Minify", Q_NULLPTR));
         JavaSriptRadioButton->setText(QApplication::translate("Minify", "JavaSript", Q_NULLPTR));
         CSSRadioButton->setText(QApplication::translate("Minify", "CSS", Q_NULLPTR));
         LoadButton->setText(QApplication::translate("Minify", "Bet\303\266lt\303\251s", Q_NULLPTR));
-        AllInOneButton->setText(QApplication::translate("Minify", "all in one", Q_NULLPTR));
+        AllInOneButton->setText(QApplication::translate("Minify", "Teljes minimaliz\303\241l\303\241s", Q_NULLPTR));
         SaveButton->setText(QApplication::translate("Minify", "Ment\303\251s", Q_NULLPTR));
         CommentButton->setText(QApplication::translate("Minify", "Komment", Q_NULLPTR));
         WhiteSpaceButton->setText(QApplication::translate("Minify", "Feh\303\251r karakter", Q_NULLPTR));
@@ -686,7 +715,7 @@ public:
         OriginalSizeLabel->setText(QApplication::translate("Minify", "0 byte", Q_NULLPTR));
         MinimalizedLable->setText(QApplication::translate("Minify", "Minimaliz\303\241lt", Q_NULLPTR));
         MinimalizedSizeLabel->setText(QApplication::translate("Minify", "0 byte", Q_NULLPTR));
-        DifferencesLable->setText(QApplication::translate("Minify", "567 kbyet 100% megtakar\303\255t\303\241s", Q_NULLPTR));
+        DifferencesLable->setText(QString());
     } // retranslateUi
 
 };
