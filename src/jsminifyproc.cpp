@@ -87,7 +87,7 @@ void jsMinifyProc::nameGenerator (int i){
 		return;
 	}
 
-	if (variables[i] == 'z') {
+	if (variables[i] == 'Z') {
 		variables[i] = 'a';
 		nameGenerator(i + 1);
 	}
