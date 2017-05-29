@@ -125,14 +125,11 @@ void jsMinifyProc::getName(const std::string partString,const std::string regex)
 }
 
 std::string jsMinifyProc::nameReplace(std::string str) {	
+	for (auto it = container.rbegin(); it != container.rend(); ++it) {
 
-	std::vector<std::string> v;
-
-	for (std::map<std::string, std::string>::iterator it = container.begin(); it != container.end(); ++it) {
-		v.push_back(it->first);
 		std::regex e("([(}) ;\\t\\n]?)(" + container[it->first] + ")(\\W+)");
-		
-		str = std::regex_replace(str, e, "$1"+ it->first +"$3"); //replace
+
+		str = std::regex_replace(str, e, "$1" + it->first + "$3"); //replace
 	}
 	return str;
 }
