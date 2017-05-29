@@ -110,6 +110,7 @@ void jsMinifyProc::getName(const std::string partString,const std::string regex)
 	while (std::regex_search(s, m, e)) {
 		if (m.size() >= 2) {
 			nameGenerator(0);
+			if (container.count(m[1]) == 1) nameGenerator(0);
 			container[variables] = m[1];
 		}
 		s = m.suffix().str();
