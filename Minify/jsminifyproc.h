@@ -22,7 +22,7 @@ public:
 private:
     std::string variables;
     std::map<std::string, std::string> container;
-
+    void jsMinifyProc::newNameGenerator(std::string regex);
     const std::string vregex = "[(}) ;\\t\\n]?var\\s+([A-Za-z]{1}[A-Za-z0-9]*)";
     const std::string fregex = "[(}) ;\\t\\n]?function\\s+([A-Za-z]{1}[A-Za-z0-9]*)\\s*\\(";
 

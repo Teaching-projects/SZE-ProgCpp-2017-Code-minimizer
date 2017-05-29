@@ -12,6 +12,18 @@ jsMinifyProc::jsMinifyProc(sourceCode source) {
     setOldSource(source);
 }
 
+void jsMinifyProc::newNameGenerator(std::string regex){
+    std::string s = oldSource.toString();
+
+    std::smatch m;
+    std::regex e("([(}) ;\\t\\n]?var\\s+)([A-Za-z]{1}[A-Za-z0-9]*)");
+
+    s = std::regex_replace(s, e, "$1bls$2"); //replace
+
+    oldSource.empty();
+    oldSource.append(s);
+}
+
 void jsMinifyProc::resetName(void) {
     variables = "`";
 }
@@ -88,7 +100,7 @@ void jsMinifyProc::nameGenerator(int i) {
         return;
     }
 
-    if (variables[i] == 'z') {
+    if (variables[i] == 'Z') {
         variables[i] = 'a';
         nameGenerator(i + 1);
     }
@@ -130,9 +142,15 @@ std::string jsMinifyProc::nameReplace(std::string str) {
 
     for (std::map<std::string, std::string>::iterator it = container.begin(); it != container.end(); ++it) {
         v.push_back(it->first);
-        std::regex e("([(}) ;\\t\\n]?)(" + container[it->first] + ")(\\W+)");
+        std::regex e("([(}) ;\\t\\n]?)(" + it->second + ")(\\W+)");
 
-        str = std::regex_replace(str, e, "$1" + it->first + "$3"); //replace
+        str = std::regex_replace(str, e, "$1qweqwe"+ (it->first) + "$3"); //replace
+    }
+    for (std::map<std::string, std::string>::iterator it = container.begin(); it != container.end(); ++it) {
+        v.push_back(it->first);
+        std::regex e("([(}) ;\\t\\n]?)(qweqwe" + it->first + ")(\\W+)");
+
+        str = std::regex_replace(str, e, "$1" +it->first + "$3"); //replace
     }
     return str;
 }
@@ -163,6 +181,7 @@ void jsMinifyProc::minimizeName(std::string regex) {
 
 void jsMinifyProc::minimizeVariableName(void) {
     container.clear();
+
     minimizeName(vregex);
 
 }
@@ -179,5 +198,6 @@ void jsMinifyProc::changeName(char c, int *beforeC, std::string regex) {
 
 void jsMinifyProc::minimizeFunctionName(void) {
     container.clear();
+
     minimizeName(fregex);
 }

@@ -38,7 +38,7 @@ Minify::Minify(QWidget *parent) : QMainWindow(parent), ui(new Ui::Minify)
 
 Minify::~Minify()
 {
-    delete ui;
+        delete ui;
 }
 
 void Minify::on_AllInOneButton_clicked()
@@ -166,13 +166,16 @@ void Minify::on_CSSRadioButton_clicked()
     isJsType = false;
     ui->VariableButton->setEnabled(false);
     ui->FunctionButton->setEnabled(false);
+
+    ui->VariableButton->setChecked(false);
+    ui->FunctionButton->setChecked(false);
 }
 
 void Minify::doMinimize()
 {       
         Minify::readSource();
         if(isJsType)
-            jsMinify.resetName();
+           jsMinify.resetName();
 
         if (ui->CommentButton->isChecked())
         {
