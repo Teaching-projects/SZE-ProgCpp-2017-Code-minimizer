@@ -8,6 +8,7 @@ class ReadFile
 {
 public:
     static std::string readFile(std::string path);
+    static std::string getFileExtension(std::string fileName);
 };
 
 #endif
